@@ -1,0 +1,266 @@
+# todo: add a Symbol + Description per faction
+#---------------------------------------------------------
+# == Required values ==
+# Id:                       - The id must be unique and is used in savegames so if you change it, this will break existing savegames. The id must be < 100 else a player faction will be created! You can have gaps in the id list.
+# FactionName:  			- No spaces and do not use special characters > can be used in the localization! Factio Name = used as KEY; FactionName is the reference for use with playfields, POI and such!
+# Abbrev:   				- Only 3 letters. Avoid special characters
+# Color: ",,"  				- To get the RGB color code, multiply 255 with the float. To get the float for the setting, divide the RGB by 255
+# Description:              - The description (if available) will be shown on top of all NPC factions.
+#
+# == Settings for STATIC factions ==
+# (Factions like the Legacy, Alien .. you cannot interact with or improve your standing or such)
+# Friendly: true	- Always friendly; DefReputation.ecf. is not used; Do not set 'Reputation: true' when using this; 
+# Unfriendly: true  - Alsways hostile; DefReputation.ecf. is not used; Do not set 'Reputation: true' when using this; 
+# Note: not setting either Friendly or Unfriendly defaults the faction to a NEUTRAL state
+#
+# == Settings for DYNAMIC factions ==
+# (Factions like the Zirax with Reputation, own territoryclaim on planets, improve/loose reputation etc pp)
+# Reputation: true   		- If NOT set, the reputation matrix in the DefReputation.ecf is NOT used! Faction is static-hostile if FriendlyToPlayers is not set to true then.
+# ClaimTerritory: true		- If set to true, the faction can have a visual territory on planets; If not set, no territory is created around the factions POIs. Does NOT relate to galactic territories! Thesea are set in the galaxy.ecf
+# == Other Settings ===
+# OmitMapLegend: true		- Of set the factions is HIDDEN from the faction-info list on the maps
+# HideAbbrev: true          - Will hide the Abbrev of the faction in the HUD (Faction-tag)
+# Discovery: true           - Factions can be discovered as soon as any of their POIs is discovered. To enable that a faction is 'discoverable', add 'Discovery: true' to the faction in Faction.ecf. Use console cmd 'faction discover <faction>' to debug that.
+# AttackNPC: true           - NPC factions will attack other NPC faction that have this enabled
+# == Notes ===
+# You cannot MIX settings for STATIC and DYNAMIC factions!
+# Some factions (Zirax, Talon, Alien, Polaris, Prey, Predator, Admin) are not available for customization as they are handled as internal faction references or fallbacks; see comments below!
+#
+#
+#================================================================================
+#    HARDCODED FACTIONS
+# >> Do NOT change anything, except COLOR
+# >> Hard coded factions need to be defined/placed BEFORE any other faction!
+#================================================================================
+#
+{ Faction Id: 1, Name: "Public"
+  Abbrev: Pub
+  Color: "0.9, 0.9, 0.9"
+  OmitMapLegend: true
+  HideAbbrev: true
+  NPC: false
+}
+
+{ Faction Id: 2, Name: "Zirax"       #Zirax Empire head faction; split into houses: Xenu, Rados, Epsilon, Ghyst, Serdu,..
+  Abbrev: Zrx
+  Color: "0.9, 0.2, 0.2"
+  ClaimTerritory: true
+  Reputation: true            # Do not change. Hardcoded effect on Base Attacks. Change will lead to issues with related features!
+  AttackNPC: true
+  Discovery: true
+}
+
+{ Faction Id: 3, Name: "Predator"
+  Abbrev: Prd
+  Color: "0.9, 0.75, 0"
+  HideAbbrev: true
+  OmitMapLegend: true
+}
+
+{ Faction Id: 4, Name: "Prey"
+  Abbrev: Pry
+  Color: "0, 0.75, 0.75"
+  HideAbbrev: true
+  OmitMapLegend: true
+}
+
+{ Faction Id: 5, Name: "Admin"
+  Abbrev: Adm
+  Color: "0, 0.9, 0.9"
+  Friendly: true
+  HideAbbrev: true
+  OmitMapLegend: true
+  NPC: false
+}
+
+{ Faction Id: 6, Name: "Talon"       #Main Story Faction
+  Abbrev: Tal
+  Color: "0.2, 0.9, 0.2"
+  ClaimTerritory: true
+  Reputation: true            # Do not change. Hardcoded effect on Base Attacks. Change will lead to issues with related features!
+  Discovery: true
+}
+	
+{ Faction Id: 7, Name: "Polaris"                #Main Story Faction
+  Abbrev: Pol
+  Color: "0.9, 0.6, 0.2"
+  ClaimTerritory: true
+  Reputation: true
+  Discovery: true
+}
+
+{ Faction Id: 8, Name: "Alien"             #Use for Dungeons and abandoned POI
+  Abbrev: Aln
+  Color: "0.9, 0.9, 0.9"
+  Unfriendly: true
+  OmitMapLegend: true
+  HideAbbrev: true
+  AttackNPC: true
+  Discovery: true
+}
+
+#===========================
+#  CUSTOM STATIC Factions
+#===========================
+
+{ Faction Id: 9, Name: "DESC"               #Only for DESC Modules/Stations with GIN
+  Abbrev: DSC
+  Color: "0.9, 0.9, 0.9"
+  Friendly: true
+  OmitMapLegend: true
+  HideAbbrev: true
+}
+{ Faction Id: 10, Name: "TheLegacy"          #Main Story Faction
+  Abbrev: Lgc
+  Color: "0, 1, 0.67"
+  Unfriendly: true
+  AttackNPC: true
+  Discovery: true
+}
+
+{ Faction Id: 11, Name: "UCH"                #Main Story Faction
+  Abbrev: UCH
+  Color: "0.2, 0.2, 0.9"
+  Friendly: true
+  Discovery: true
+}
+
+{ Faction Id: 12, Name: "Progenitor"         #Main Story Faction
+  Abbrev: Prg
+  Color: "0.9, 0.9, 0.9"
+  Friendly: true
+  OmitMapLegend: true
+  HideAbbrev: true
+  Discovery: true
+}
+
+{ Faction Id: 13, Name: "Void"               #Main Story Faction
+  Abbrev: Voi
+  Color: "0, 0, 0"
+  Unfriendly: true
+  OmitMapLegend: true
+  HideAbbrev: true
+  Discovery: true
+}
+{ Faction Id: 14, Name: "GLaD"               #Main Story Faction
+  Abbrev: GLD
+  Color: "0.2, 0.2, 0.9"
+  Friendly: true
+  Discovery: true
+}
+
+{ Faction Id: 15, Name: "Civilian"      #Fallback for NPC spawners only! Do not use for ships or POI or territories!
+  Abbrev: Civ
+  Color: "0.9, 0.9, 0.9"
+  Friendly: true
+  OmitMapLegend: true
+  HideAbbrev: true
+  Discovery: true
+}
+{ Faction Id: 27, Name: "Warlord"       #Use for hostile random POI and Encounters
+  Abbrev: War
+  Color: "0.9, 0.2, 0.2"
+  Unfriendly: true
+  OmitMapLegend: true
+  HideAbbrev: true
+  AttackNPC: true
+  #Discovery: true
+}
+#===========================
+#  CUSTOM DYNAMIC Factions
+#===========================
+
+{ Faction Id: 16, Name: "Pirates"
+  Abbrev: Pir
+  Color: "0.8, 0.8, 0"
+  ClaimTerritory: true
+  Reputation: true
+  Discovery: true
+  AttackNPC: true
+}
+
+{ Faction Id: 17, Name: "Kriel"
+  Abbrev: Kri
+  Color: "0.5, 0, 0.8"
+  ClaimTerritory: true
+  Reputation: true
+  Discovery: true
+  AttackNPC: true
+}
+
+{ Faction Id: 18, Name: "Trader"
+  Abbrev: Tra
+  Color: "0.6, 1, 1"
+  ClaimTerritory: true
+  Reputation: true
+  Discovery: true
+}
+
+{ Faction Id: 19, Name: "Colonists"
+  Abbrev: Col
+  Color: "0.9, 0.9, 0.9"
+  ClaimTerritory: true
+  Reputation: true
+  Discovery: true
+}
+
+{ Faction Id: 20, Name: "Tesch" 
+  Abbrev: Tsc
+  Color: "0.9, 0.2, 0.6"
+  ClaimTerritory: true
+  Reputation: true            
+  Discovery: true
+}
+
+#==============================
+#  Custom dynamic SUB-Factions
+#==============================
+
+{ Faction Id: 21, Name: "Xenu"               # Zirax Empire - Military
+  Abbrev: Xen
+  Color: "0.9, 0.2, 0.2"
+  OmitMapLegend: true
+  ClaimTerritory: true
+  Reputation: true            
+  Discovery: true
+}
+{ Faction Id: 22, Name: "Rados"               # Zirax Empire - Support
+  Abbrev: Rad
+  Color: "0.9, 0.2, 0.2"
+  ClaimTerritory: true
+  OmitMapLegend: true
+  Reputation: true            
+  Discovery: true
+}
+{ Faction Id: 23, Name: "Epsilon"             # Zirax Empire - Communication
+  Abbrev: Eps
+  Color: "0.9, 0.2, 0.2"
+  OmitMapLegend: true
+  ClaimTerritory: true
+  Reputation: true            
+  Discovery: true
+}
+{ Faction Id: 24, Name: "Ghyst"               # Zirax Empire - Recon
+  Abbrev: Ghy
+  Color: "0.9, 0.2, 0.2"
+  OmitMapLegend: true
+  ClaimTerritory: true
+  Reputation: true            
+  Discovery: true
+}
+{ Faction Id: 25, Name: "Serdu"             # Zirax Empire - Religion
+  Abbrev: Ser
+  Color: "0.9, 0.2, 0.2"
+  OmitMapLegend: true
+  ClaimTerritory: true
+  Reputation: true            
+  Discovery: true
+}
+{ Faction Id: 26, Name: "Abyssal"             # Zirax Empire - Science
+  Abbrev: Aby
+  Color: "0.9, 0.2, 0.2"
+  OmitMapLegend: true
+  ClaimTerritory: true
+  Reputation: true            
+  Discovery: true
+}

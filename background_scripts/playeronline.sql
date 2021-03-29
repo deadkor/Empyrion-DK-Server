@@ -1,0 +1,1 @@
+SELECT playername FROM LoginLogoff WHERE logoffticks IS NULL GROUP BY playername;

@@ -1,0 +1,33 @@
+work on token
+{ Token Id: 9992, Name: Root Beer Formula
+  Description: The secret formula of the delicious Totally Overpowered Brewery low-gravity root beer
+  #RemoveOnUse: true
+}
+
+check later
+# Model: @models/Blocks/Misc/SecurityCamera01Prefab   (non-functional/non-textured)
+# Model: @models/Blocks/Misc/SecurityCamera02Prefab   (non-functional/non-textured)
+# Model: @models/Blocks/Misc/SecurityCamera03Prefab   (non-functional/non-textured)
+
+
+for auto miner : EClassConfig
+{ Entity Name: AsteroidVoxel01
+  EntityType: AstVoxel													===> to change to UnderRes ? (model IronResource)
+  ModelType: ChunkClusterBase, param1: AsteroidVoxel01, param2: 2
+  Prefab: Base
+  Class: AsteroidVoxel
+  UseProxy: true
+  Parent: POI
+  IsEnemy: false
+  MapIcon: map_SathiumResource
+  POIType: POI
+
+{ Entity Name: AsteroidIron
+  EntityType: AstRes													===> to change to UnderRes ? (model IronResource)
+  Mesh: Asteroids/Resources/AsteroidIronPrefab
+  Prefab: AsteroidResource
+  Class: AsteroidResource
+  Parent: Asteroids
+
+to look what to do with it
+{ +Block Id: 1373, Name: Portal

@@ -1,0 +1,174 @@
+
+# Tokens are instances of the item 'GenericToken' that will get their purpose in game.
+# F.e. you can define a lock code for a door to be opened by a token that has the id of this lock code. Or you can
+# define a quest or a PDA mission that needs a token to get finished.
+# You don't need to define every token here, but if defined, the name and description will show up correctly.
+# Set RemoveOnUse: true to remove it from the inventory of the player as soon as it was used.
+# === Possible Usage ====
+# 1. Place a Token with a certain key (= Meta ) to a inventory (f.ex. Container in an Alien POI): Open Console > 'give item Token 0001' > This will add a token to your inventory > place it in a container > Save POI (Only works with admin core POI at the moment)
+# 2. Give a Token with a certain Meta to a player via PDA via Reward or InventoryOps: Use 'Token:0001' to give the Red Keycard for example
+# 3. Give a Token in a dialogue: Use a function, f.ex AddItem('KeyCardBlack', 3, 1234)  = Will give the player 3x Keycard Black with the Meta 1234
+# 4. Let a Trader sell/buy tokens: Enter an item to Trader config. Example: 'Item3: "Token:0001, 1, 1-2, 1-1, 1-2" = will buy and sell the Red Keycard from below
+# 5. Use a Token in a loot table. Same as with a Trader. Use 'Token:0001' in your loot table/config 
+# ========== IMPORTANT ===========
+# - Currently only the item 'Token' (Itemsconfig.ecf id: 1305) can have a 4-digit META element. Any OTHER "keycard" named item or other items in general can NOT have meta info attached!
+# - When working with the TokenConfig.ecf, adding custom names for the Token:Meta combination, you can use the console command 'token reload' when you are ingame. You do not need to restart the game when working with this file!
+# =================================
+
+# Example Token
+{ Token Id: 1, Name: KeyCardRed
+  Description: The red key card will open red doors
+# CustomIcon: AddAnIconNameHere
+}
+
+{ Token Id: 2, Name: KeyCardGreen
+  Description: The green key card will open green doors
+}
+
+{ Token Id: 1234, Name: Golden Key
+  Description: With the golden key you can open all golden doors
+  #RemoveOnUse: true
+}
+
+# === RP Creditibility Token ===
+
+{ Token Id: 100, Name: CredTokenZiraxEmpire
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 101, Name: CredTokenXenu
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 102, Name: CredTokenRados
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 103, Name: CredTokenGhyst
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 104, Name: CredTokenEpsilon
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 105, Name: CredTokenSerdu
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 106, Name: CredTokenAbyssal
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 107, Name: CredTokenPolaris
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 108, Name: CredTokenTradersGuild
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 109, Name: CredTokenPirates
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 110, Name: CredTokenKriel
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 111, Name: CredTokenTesch
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 112, Name: CredTokenTalon
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+{ Token Id: 113, Name: CredTokenColonists
+  Description: Restore your reputation with the faction from Hostile or Unfriendly to Neutral. Find its ambassador or a console of the galactic information network (GIN)
+  CustomIcon: KeyCardRed
+  MarketPrice: 300000, display: true
+  #RemoveOnUse: true
+}
+
+# === Explorer Reports ===
+
+{ Token Id: 200, Name: ExplReportPlanet
+  Description: Contact the EXPLORERS GUILD via a Galactic Information Network (GIN) console and trade in the report for a reward.
+  CustomIcon: Tablet
+  MarketPrice: 25000, display: true
+  #RemoveOnUse: true
+}
+
+# === Story Tokens (Do not change! === 
+
+{ Token Id: 9999, Name: AI Routine 32 Key
+  Description: Activates a station or the telporter in that station. We need to find out.
+  #RemoveOnUse: true
+}
+{ Token Id: 9998, Name: Chief Palant
+  Description: The Log of Chief Engineer Palant found in the wreckage of the UCH Heidelberg
+  #RemoveOnUse: true
+}
+{ Token Id: 9997, Name: Ensign Emmerson
+  Description: The Log of Ensign Emmerson found in the wreckage of the UCH Heidelberg
+  #RemoveOnUse: true
+}
+{ Token Id: 9996, Name: M
+  Description: The log of a crewman with the mysterious short-handle M found in the wreckage of the UCH Heidelberg
+  #RemoveOnUse: true
+}
+{ Token Id: 9995, Name: Titan Code Recovery Main Key
+  Description: Required to reveal a code fragment each with one of the 3 prepared consoles in the TITAN
+  #RemoveOnUse: true
+}
+{ Token Id: 9994, Name: Titan Code Fragment
+  Description: Code fragment required to generate the override code for the TITAN failsave datacache
+  #RemoveOnUse: true
+}
+{ Token Id: 9993, Name: Zirax Commander Keycard
+  Description: A full-access keycard for any base on the moon dropped accidentally while stumbling in your weapon fire
+  #RemoveOnUse: true
+}
+{ Token Id: 9992, Name: Root Beer Formula
+  Description: The secret formula of the delicious Totally Overpowered Brewery low-gravity root beer
+  #RemoveOnUse: true
+}
+{ Token Id: 9991, Name: Repair Bay Key Card
+  Description: "Repair Bay Key Card"
+}
+{ Token Id: 9990, Name: Med and O2 Stations Key Card
+  Description: "Med and O2 Stations Key Card"
+}
+{ Token Id: 9989, Name: Seal of the House of Abyssal
+  Description: "Grants access to the hidden War of Silence archives of the House of Abyssal"
+}
+{ Token Id: 9988, Name: Ghyst Command Card
+  Description: "Access Card for restricted areas. Can be found in the pockets of Ghyst Commanders"
+}

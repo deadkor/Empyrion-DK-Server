@@ -1,0 +1,861 @@
+to config_example => Plants & new plants, ramps for SV, WaterBlockIG, New Med (kit & block), Explosives, Ribs
+
+to test for keep coherence size between MS / SV
+  SizeInBlocks: "1,1,1", display: true		to keep ?
+  SizeInBlocksLocked: "Base,MS"    			to remove ?
+
+add IceBlocks when drilled
+{ Block Id: 130, Name: Snow05
+  Material: snow
+  Shape: Terrain
+  Mesh: terrain
+  Texture: 162
+  ShowUser: No
+  Group: snow
+}
+  { Child DropOnDestroy
+    Item: IceBlocks
+    Count: "2,4"
+    Prob: 0.2
+  }
+{ Block Id: 757, Name: RealRock2Snow  
+
+
+NEW PLANS :
+DONE - find ID free for :
+{ +Block Id: 138, Name: HangarDoor16x15, Ref: HangarDoor10x5
+  Model: @models/Blocks/Mothership/HangarDoor14x7Prefab
+  SizeInBlocks: "16,15,1", display: true
+  HitPoints: 20820, type: int, display: true
+  Mass: 12000, type: float, display: true, formatter: Kilogram
+}
+
+
+DONE - new plants :
+{ Block Id: 505, Name: AlienPlantThorn2
+  Class: CropsGrown
+  { Child DropOnHarvest
+    Item: AlienThorn
+    Count: 1
+  }
+  { Child CropsGrown   
+    OnHarvest: AlienPlantThorn1
+    OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  IsTerrainDecoration: true
+  IsDeco: true
+  IsPlant: true
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_thorn2Prefab
+  ShowUser: No
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: AlienPlantThorn1
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    AlienThorn: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+
+OTHERS new alien plants to grow if AlienPlantThorn2 success :
+==> see what to do with it, unused at all actually
+{ Block Id: 578, Name: Trumpet
+  Class: CropsGrown
+  { Child DropOnHarvest
+    Item: TrumpetGreens
+    Count: 1
+  }
+
+{ Block Id: 932, Name: AlienPlant05Harvested
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: AlienPlant05
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/SpeedTrees/AlienFernHarvestedPrefab
+  PickupTarget: AlienPlant05Harvested
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 298, Name: AlienPlant05
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: PhoenixFernFonds
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: AlienPlant05Harvested  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: AlienPlant05Harvested
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/SpeedTrees/AlienFernPrefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: AlienPlant05Harvested
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    PhoenixFernFonds: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+{ Block Id: 933, Name: AlienPlant11Harvested
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: AlienPlant11
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/AlienVegetation/AlienPlant11HarvestedPrefab
+  PickupTarget: AlienPlant11Harvested
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 302, Name: AlienPlant11
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: Varonroot
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: AlienPlant11Harvested  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: AlienPlant11Harvested
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/AlienVegetation/AlienPlant11Prefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: AlienPlant11Harvested
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    Varonroot: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+{ Block Id: 506, Name: AlienPlantPod1
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: AlienPlantPod2
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_pod1Prefab
+  PickupTarget: AlienPlantPod1
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 507, Name: AlienPlantPod2
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: AlienParts03
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: AlienPlantPod1  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: AlienPlantPod1
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_pod2Prefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: AlienPlantPod1
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    AlienParts03: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+{ Block Id: 508, Name: AlienPlantReef1
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: AlienPlantReef2
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_reef1Prefab
+  PickupTarget: AlienPlantReef1
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 509, Name: AlienPlantReef2
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: AlienParts01
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: AlienPlantReef1  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: AlienPlantReef1
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_reef2Prefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: AlienPlantReef1
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    AlienParts01: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+{ Block Id: 511, Name: AlienPlantSpike2
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: AlienPlantSpike1
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_spike2Prefab
+  PickupTarget: AlienPlantSpike2
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 510, Name: AlienPlantSpike1
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: AlienSpikeLemon
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: AlienPlantSpike2  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: AlienPlantSpike2
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_spike1Prefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: AlienPlantSpike2
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    AlienSpikeLemon: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+{ Block Id: 512, Name: AlienPlantMushroom1
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: AlienPlantMushroom2
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_mushroom1Prefab
+  PickupTarget: AlienPlantMushroom1
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 513, Name: AlienPlantMushroom2
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: MushroomSpiky
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: AlienPlantMushroom1  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: AlienPlantMushroom1
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/AlienPlantsAnim/alienplant_mushroom2Prefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: AlienPlantMushroom1
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    MushroomSpiky: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+{ Block Id: 920, Name: ClusterShroomHarvested
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: ClusterShroom
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/FractalFlora/ClusterShroomHarvestedPrefab
+  PickupTarget: ClusterShroomHarvested
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 522, Name: ClusterShroom
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: FireMossScrapings
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: ClusterShroomHarvested  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: ClusterShroomHarvested
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/FractalFlora/ClusterShroomPrefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: ClusterShroomHarvested
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    FireMossScrapings: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+{ Block Id: 921, Name: ScalyPodsHarvested
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: ScalyPods
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/FractalFlora/ScalyPodsHarvestedPrefab
+  PickupTarget: ScalyPodsHarvested
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 526, Name: ScalyPods
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: Egg
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: ScalyPodsHarvested  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: ScalyPodsHarvested
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/FractalFlora/ScalyPodsPrefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: ScalyPodsHarvested
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    Egg: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+{ Block Id: 923, Name: ConfettiMossHarvested
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: ConfettiMoss
+    GrowthRate: 60
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: plants
+  Shape: Deco
+  Model: @models2/Environment/Plants/FractalFlora/ConfettiMossHarvestedPrefab
+  PickupTarget: ConfettiMossHarvested
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 574, Name: ConfettiMoss
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: ConfettiMossScrapings
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: ConfettiMossHarvested  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: Deco
+  PickupTarget: ConfettiMossHarvested
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Plants/FractalFlora/ConfettiMossPrefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: ConfettiMossHarvested
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+    ConfettiMossScrapings: 4
+    WaterBottle: 5
+    NutrientSolution: 1
+  }
+}
+
+
+in progress "grow ore" :
+{ Block Id: 906, Name: CrystalStraightHarvested						#	==> or CrystalsPyramidBlue
+  Class: PlantGrowing
+  AllowedInBlueprint: false, display: true
+  IndexName: Plant
+  { Child PlantGrowing
+    Next: CrystalStraight
+    GrowthRate: 20
+    FertileLevel: 1
+	OnDeath: PlantDead2
+  }
+  Material: rock																#		==> ori at "rock" maybe to replace by plants ?
+  Shape: ModelEntity
+  Model: @models2/Environment/Rocks/Crystals/CrystalStraightHarvestedPrefab
+  PickupTarget: CrystalStraightHarvested
+  ShowUser: NoButCSV             # reported by HWS 
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Place: Free
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Block Id: 894, Name: CrystalStraight
+  Class: CropsGrown
+  AllowedInBlueprint: false, display: true 
+  IndexName: Plant
+  { Child DropOnHarvest
+    Item: PentaxidOre
+    Count: 2
+  }
+  { Child CropsGrown   
+    OnHarvest: CrystalStraightHarvested  
+  	OnDeath: PlantDead 
+  }
+  Material: plants
+  Shape: ModelEntity
+  PickupTarget: CrystalStraightHarvested
+  IsAccessible: false, type: bool
+  Collide: "bullet,rocket,melee,sight"
+  Model: @models2/Environment/Rocks/Crystals/CrystalStraightPrefab
+  AllowPlacingAt: "Base,MS,SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  ShowBlockName: true
+  XpFactor: 0.25
+  { Child DropOnDestroy
+    Count: 0
+  }
+}
+{ Template Name: CrystalStraightHarvested
+  DeconOverride: Stop
+  OutputCount: 2
+  CraftTime: 15
+  Target: FoodP
+  { Child Inputs
+	DrillAttachmentCV: 1
+    PentaxidOre: 10
+    WaterBottle: 50
+    CrushedStone: 1000
+  }
+}
+{ +Block Id: 139, Name: LightOre01
+  Class: Light
+  IndexName: Light
+  Group: cpgGrowingLight
+  Material: metallight													#			==> ori at "metalhard"
+  MarketPrice: 62079, display: true
+  Shape: ModelEntity
+  Tag: GrowingLight
+  Place: Face
+  Collide: "bullet,rocket"
+  DropMeshfile: Entities/Misc/BagSmallPrefab
+  BlockColor: "110,110,110"
+  AllowPlacingAt: "Base,MS,SS", display: true
+  Mass: 1825, type: float, display: true, formatter: Kilogram
+  Volume: 800, type: float, display: true, formatter: Liter
+  StackSize: 4000
+  ModelScaleLocked: true
+  IsActivateable: true
+  Info: bkiLightPlant, display: true
+  Category: Devices
+  EnergyIn: 30, type: int, display: true, formatter: Watt
+  StabilitySupport: false
+
+  UnlockCost: 0, display: true
+  UnlockLevel: 25, display: true
+  #TechTreeParent: LightLargeBlocks
+  #TechTreeNames: "Base,Capital Vessel"
+  
+  Temperature: 100, display: true
+  
+  IsActivateableInCP: true
+  ShowBlockName: true
+  Model: @models/Blocks/WeaponsShip/DrillAttachmentCVRetractPrefab
+  IsTextureable: true   # !!!
+  IsGPUInstance: false  # !!!
+  Texture: 50 
+  SoundOpen: UseActions/WeaponOpenClose
+  SoundClose: UseActions/WeaponOpenClose
+  IsRetractable: true, display: true 
+  SizeInBlocks: "1,2,1", display: true										#		==> to keep ?
+}
+{ Template Name: LightOre01
+  DeconOverride: Stop
+  OutputCount: 1
+  CraftTime: 90
+  Target: AdvC
+  { Child Inputs
+	DrillAttachmentCV: 1
+    SteelPlate: 5
+    GlassPlate: 1
+    OpticalFiber: 10
+  }
+}
+{ +Block Id: 140, Name: GrowingOrePot
+  Material: fertile
+  DropMeshfile: Entities/Misc/BagSmallPrefab
+  Texture: "6,31,31,31,31,31"
+  MarketPrice: 1100, display: true
+  Shape: New
+  Place: Free
+  Model: Cube
+  BlockColor: "110,110,110"
+  IsOxygenTight: true, display: true
+  AllowPlacingAt: "Base,MS,SS", display: true
+  Mass: 2080, type: float, display: true, formatter: Kilogram
+  Volume: 80, type: float, display: true, formatter: Liter
+  StackSize: 500
+  Info: bkiGrowingPotSimple, display: true
+  Category: BuildingBlocks
+  IsColorable: true
+  IsTextureable: true
+																				==> One of them, maybe CylinderThinTJoint ? :ChildShapes: "Cube, CutCornerE, CutCornerB, SlicedCornerA1, CornerHalfB, CornerSmallC, CornerC, CornerHalfA3, RampCMedium, RampA, RampC, CornerRoundB, CornerRoundADouble, RoundCornerA, CubeRoundConnectorA, EdgeRound, Cylinder, RampRoundFTriple, RampRoundF, SmallCornerRoundB, SmallCornerRoundA, SphereHalf, Cone, ConeB, CutCornerC, Cylinder6Way, CornerRoundATriple, CornerA, CornerHalfA1, CornerDoubleA3, CornerSmallB, PyramidA, Wall, WallLShape, WallSloped, WallSloped3Corner, WallSlopedC, WallSlopedCMediumright, WallSlopedAright, WallSlopedCMediumleft, WallSlopedAleft, WallCornerRoundB, WallSlopedRound, WallEdgeRound, WallEdgeRound3Way, WallCornerRoundA, WallCornerRoundC, WallSloped3CornerLow, WallCorner, WallLow, CubeHalf, RampADouble, RampCLow, RampBMedium, RampD, CutCornerEMedium, Beam, CylinderThin, CylinderThinTJoint, CylinderL, PipesFence, FenceTop, RampCHalf, CornerHalfA3Medium"
+}
+{ +Template Name: GrowingOrePot
+  BaseItem: true #C1 Ba CV 1
+  DeconOverride: Continue 
+  CraftTime: 90
+  Target: AdvC
+  { Child Inputs
+    Fiber: 4
+    PlasticMaterial: 200
+    SteelPlate: 50
+    CobaltAlloy: 50
+	RockDust: 1000
+  }
+}
+
+
+{ +Item Id: 32, Name: Explosives to set AllowRemote: false to true itemconfig.ecf | to finish, still not avalaible from remote
+landedmine
+{ Block Id: 773, Name: ScifiMine1
+{ +Template Name: ScifiMine1
+  OutputCount: 1 #A2 5
+  CraftTime: 5
+  Target: "SmallC,HoverC,BaseC,LargeC,AdvC"
+  { Child Inputs
+    SteelPlate: 4
+    EnergyCell: 1
+    Electronics: 1
+  }
+}
+to check ==> OpenPopup: true
+# Damage and Multipliers defined in EClassConfig > Entity Name: ExplosiveDevice
+{ +Item Id: 47, Name: ScifiMine1
+  MarketPrice: 340, display: true
+  Meshfile: @models/Blocks/Misc/ScifiMine1Prefab
+  DropMeshfile: Entities/Misc/BagSmallPrefab
+  PickupToToolbar: true
+  Material: metalitem
+  Canhold: false
+  HoldType: 0
+  StackSize: 2000
+  Mass: 0.5, type: float, display: true, formatter: Kilogram
+  Volume: 1, type: float, display: true, formatter: Liter
+  Category: Weapons/Items
+  Info: bkiExplosives, display: true
+  { Child 0
+    Class: PlaceExplosives
+	AllowRemote: true
+    ROF: 1, type: float
+    Range: 2
+    NoiseStrength: 100, display: false   
+    SfxBegin: UseActions/ExplosivesAttach
+	
+  }
+
+  UnlockCost: 0, display: true
+  UnlockLevel: 5, display: true
+  TechTreeNames: Weapons
+  TechTreeParent: Explosives
+}

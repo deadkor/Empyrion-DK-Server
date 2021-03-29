@@ -1,0 +1,743 @@
+# -------------------- Configuration of the ranking boxes, RankingBoxX,Y
+
+- RankingBox1,1 = RkgPlayerKills
+- RankingBox2,1 = RkgNPCKills
+- RankingBox3,1 = RkgPlayerDied
+- RankingBox4,1 = RkgPlaytime
+- RankingBox5,1 = RkgBlocksPlaced
+
+- RankingBox1,2 = RkgVisitedStars
+- RankingBox2,2 = RkgVisitedPlanets
+- RankingBox3,2 = RkgVisitedMoons
+- RankingBox4,2 = RkgDiscoveredPOIs
+- RankingBox5,2 = RkgDiggedOres
+
+- RankingBox1,3 = RkgTravelledKM
+- RankingBox2,3 = RkgTravelledKMAir
+- RankingBox3,3 = RkgTravelledAU
+- RankingBox4,3 = RkgTravelledLY
+- RankingBox5,3 = RkgTradeVolume
+
+# -------------------- RkgPlayerKills
+
+- RkgPlayerKills.Name = PLAYER KILLS
+
+- RkgPlayerKills.PlayersTop10.Query = 
+    SELECT e.entityid, e.facgroup, e.facid, e.name, ps.killedalliedplayers + ps.killedplayers AS KilledPlayers 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND KilledPlayers > 0 
+    ORDER BY KilledPlayers DESC 
+    LIMIT 10
+- RkgPlayerKills.CacheTime = 120
+    
+- RkgPlayerKills.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, KilledPlayers 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.killedalliedplayers + ps.killedplayers) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, ps.killedalliedplayers + ps.killedplayers AS KilledPlayers 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND KilledPlayers > 0) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+          FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.killedalliedplayers + ps.killedplayers) DESC) AS RowNr, e.entityid, e.name, ps.killedalliedplayers + ps.killedplayers AS KilledPlayers 
+                FROM PlayerStatistics ps, Entities e 
+                WHERE ps.entityid = e.entityid AND KilledPlayers > 0) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgPlayerKills.LocalPlayer.CacheTime = 120
+                                        
+- RkgPlayerKills.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, ps.killedalliedplayers + ps.killedplayers AS KilledPlayers 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND KilledPlayers > 0 AND e.facgroup = 0 AND e.facid = @facid 
+    ORDER BY KilledPlayers DESC 
+    LIMIT 10
+- RkgPlayerKills.FactionTop10.CacheTime = 120
+
+- RkgPlayerKills.AllFactionsTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, SUM(ps.killedalliedplayers + ps.killedplayers) AS KilledPlayers 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND e.facgroup = 0 
+    GROUP BY e.facid 
+    ORDER BY KilledPlayers DESC 
+    LIMIT 10
+- RkgPlayerKills.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgPlayerDied
+
+- RkgPlayerDied.Name = PLAYER DIED
+
+- RkgPlayerDied.PlayersTop10.Query = 
+    SELECT e.entityid, e.facgroup, e.facid, e.name, died AS Died 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND Died > 0 
+    ORDER BY Died DESC 
+    LIMIT 10
+- RkgPlayerDied.PlayersTop10.CacheTime = 120
+
+- RkgPlayerDied.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, MainTable.Died 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.died) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, ps.died AS Died 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND Died > 0) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	   (SELECT RowNr 
+           FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.died) DESC) AS RowNr, e.entityid, e.name, ps.died AS Died 
+                 FROM PlayerStatistics ps, Entities e 
+                 WHERE ps.entityid = e.entityid AND Died > 0) 
+    	    WHERE entityid = @entityid) 
+    LIMIT 5 
+- RkgPlayerDied.LocalPlayer.CacheTime = 120
+
+- RkgPlayerDied.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, died AS Died 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND Died > 0 AND e.facgroup = 0 AND e.facid = @facid 
+    ORDER BY Died DESC 
+    LIMIT 10
+- RkgPlayerDied.FactionTop10.CacheTime = 120
+    
+- RkgPlayerDied.AllFactionsTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, SUM(died) AS Died 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND e.facgroup = 0 
+    GROUP BY e.facid 
+    ORDER BY Died DESC 
+    LIMIT 10
+- RkgPlayerDied.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgPlayerDied
+
+- RkgVisitedStars.Name = VISITED STAR SYSTEMS
+
+- RkgVisitedStars.PlayersTop10.Query = 
+    SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(DISTINCT ss.name) AS VisStars 
+    FROM DiscoveredPlayfields dp, Playfields p, SolarSystems ss, Entities e 
+    WHERE dp.pfid = p.pfid AND p.ssid = ss.ssid AND dp.entityid = e.entityid AND dp.facgroup = 1 
+    GROUP BY dp.entityid 
+    ORDER BY VisStars DESC 
+    LIMIT 10
+- RkgVisitedStars.PlayersTop10.CacheTime = 120
+
+- RkgVisitedStars.LocalPlayer.Query = 
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, MainTable.VisStars 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (COUNT(DISTINCT ss.name)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, COUNT(DISTINCT ss.name) AS VisStars 
+          FROM DiscoveredPlayfields dp, Playfields p, SolarSystems ss, Entities e 
+          WHERE dp.pfid = p.pfid AND p.ssid = ss.ssid AND dp.entityid = e.entityid AND dp.facgroup = 1 
+          GROUP BY dp.entityid) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    		(SELECT RowNr 
+            FROM (SELECT ROW_NUMBER() OVER (ORDER BY (COUNT(DISTINCT ss.name)) DESC) AS RowNr, e.entityid, e.name, COUNT(DISTINCT ss.name) AS VisStars 
+                  FROM DiscoveredPlayfields dp, Playfields p, SolarSystems ss, Entities e 
+                  WHERE dp.pfid = p.pfid AND p.ssid = ss.ssid AND dp.entityid = e.entityid AND dp.facgroup = 1 
+                  GROUP BY dp.entityid) 
+            WHERE entityid = @entityid) 
+    LIMIT 5 
+- RkgVisitedStars.LocalPlayer.CacheTime = 120
+
+- RkgVisitedStars.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(DISTINCT ss.name) AS VisStars 
+    FROM DiscoveredPlayfields dp, Playfields p, SolarSystems ss, Entities e 
+    WHERE dp.pfid = p.pfid AND p.ssid = ss.ssid AND dp.entityid = e.entityid AND dp.facgroup = 1 AND e.facgroup = 0 AND e.facid = @facid 
+    GROUP BY dp.entityid 
+    ORDER BY VisStars DESC 
+    LIMIT 10
+- RkgVisitedStars.FactionTop10.CacheTime = 120    
+    
+- RkgVisitedStars.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.VisStars) AS VisStarsFaction 
+    FROM(SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(DISTINCT ss.name) AS VisStars 
+         FROM DiscoveredPlayfields dp, Playfields p, SolarSystems ss, Entities e 
+         WHERE dp.pfid = p.pfid AND p.ssid = ss.ssid AND dp.entityid = e.entityid AND dp.facgroup = 1 
+         GROUP BY dp.entityid) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY VisStarsFaction DESC 
+    LIMIT 10
+- RkgVisitedStars.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgNPCKills
+
+- RkgNPCKills.Name = NPC KILLS (no animals)
+
+- RkgNPCKills.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, ps.killedenemies + ps.killedallied + ps.killeddrones AS KilledNPCs 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND KilledNPCs > 0 
+    ORDER BY KilledNPCs DESC 
+    LIMIT 10
+- RkgNPCKills.PlayersTop10.CacheTime = 120
+    
+- RkgNPCKills.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, MainTable.KilledNPCs 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.killedenemies + ps.killedallied + ps.killeddrones) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, ps.killedenemies + ps.killedallied + ps.killeddrones AS KilledNPCs 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND KilledNPCs > 0) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    		(SELECT RowNr 
+             FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.killedenemies + ps.killedallied + ps.killeddrones) DESC) AS RowNr, e.entityid, e.name, ps.killedenemies + ps.killedallied + ps.killeddrones AS KilledNPCs 
+                  FROM PlayerStatistics ps, Entities e 
+                  WHERE ps.entityid = e.entityid AND KilledNPCs > 0) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgNPCKills.LocalPlayer.CacheTime = 120
+
+- RkgNPCKills.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, ps.killedenemies + ps.killedallied + ps.killeddrones AS KilledNPCs 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND KilledNPCs > 0 AND e.facgroup = 0 AND e.facid = @facid 
+    ORDER BY KilledNPCs DESC 
+    LIMIT 10
+- RkgNPCKills.FactionTop10.CacheTime = 120
+    
+- RkgNPCKills.AllFactionsTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, SUM(ps.killedenemies + ps.killedallied + ps.killeddrones) AS KilledNPCs 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND e.facgroup = 0 
+    GROUP BY e.facid 
+    ORDER BY KilledNPCs DESC 
+    LIMIT 10
+- RkgNPCKills.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgDiscoveredPOIs
+
+- RkgDiscoveredPOIs.Name = DISCOVERED POIS
+
+- RkgDiscoveredPOIs.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) As NumPOIs 
+    FROM DiscoveredPOIs dp, Playfields p, Entities e 
+    WHERE dp.pfid = p.pfid AND dp.entityid = e.entityid AND dp.facgroup = 1 AND dp.poitype = 2 
+    GROUP BY dp.entityid 
+    ORDER BY NumPOIs DESC 
+    LIMIT 10
+- RkgDiscoveredPOIs.PlayersTop10.CacheTime = 120
+
+- RkgDiscoveredPOIs.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, MainTable.NumPOIs 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (COUNT(*)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS NumPOIs 
+          FROM DiscoveredPOIs dp, Playfields p, Entities e 
+          WHERE dp.pfid = p.pfid AND dp.entityid = e.entityid AND dp.facgroup = 1 AND dp.poitype = 2 
+          GROUP BY dp.entityid) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    		(SELECT RowNr 
+            FROM (SELECT ROW_NUMBER() OVER (ORDER BY (COUNT(*)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS NumPOIs 
+                  FROM DiscoveredPOIs dp, Playfields p, Entities e 
+                  WHERE dp.pfid = p.pfid AND dp.entityid = e.entityid AND dp.facgroup = 1 AND dp.poitype = 2 
+                  GROUP BY dp.entityid) 
+            WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgDiscoveredPOIs.LocalPlayer.CacheTime = 120
+
+- RkgDiscoveredPOIs.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) As NumPOIs 
+    FROM DiscoveredPOIs dp, Playfields p, Entities e 
+    WHERE dp.pfid = p.pfid AND dp.entityid = e.entityid AND dp.facgroup = 1 AND dp.poitype = 2 AND e.facgroup = 0 AND e.facid = @facid 
+    GROUP BY dp.entityid 
+    ORDER BY NumPOIs DESC 
+    LIMIT 10
+- RkgDiscoveredPOIs.FactionTop10.CacheTime = 120
+    
+- RkgDiscoveredPOIs.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.NumPOIs) AS NumPOIsFaction
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) As NumPOIs
+          FROM DiscoveredPOIs dp, Playfields p, Entities e
+          WHERE dp.pfid = p.pfid AND dp.entityid = e.entityid AND dp.facgroup = 1 AND dp.poitype = 2 
+          GROUP BY dp.entityid) AS MainTable
+    WHERE MainTable.facgroup = 0
+    GROUP BY MainTable.facid
+    ORDER BY NumPOIsFaction DESC
+    LIMIT 10;
+- RkgDiscoveredPOIs.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgBlocksPlaced
+
+- RkgBlocksPlaced.Name = BLOCKS PLACED
+
+- RkgBlocksPlaced.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, ps.blocksplaced AS BlocksPlaced 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND BlocksPlaced > 0 
+    ORDER BY BlocksPlaced DESC 
+    LIMIT 10
+- RkgBlocksPlaced.PlayersTop10.CacheTime = 120
+
+- RkgBlocksPlaced.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, BlocksPlaced 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.blocksplaced) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, ps.blocksplaced AS BlocksPlaced 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND BlocksPlaced > 0) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+          FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.blocksplaced) DESC) AS RowNr, e.entityid, e.name, ps.blocksplaced AS BlocksPlaced 
+                FROM PlayerStatistics ps, Entities e 
+                WHERE ps.entityid = e.entityid AND BlocksPlaced > 0) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgBlocksPlaced.LocalPlayer.CacheTime = 120
+
+- RkgBlocksPlaced.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, ps.blocksplaced AS BlocksPlaced 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND BlocksPlaced > 0 AND e.facgroup = 0 AND e.facid = @facid 
+    ORDER BY BlocksPlaced DESC 
+    LIMIT 10
+- RkgBlocksPlaced.FactionTop10.CacheTime = 120
+
+- RkgBlocksPlaced.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.BlocksPlaced) AS BlocksPlacedFaction 
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, ps.blocksplaced AS BlocksPlaced 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND BlocksPlaced > 0 
+          ORDER BY BlocksPlaced DESC 
+          LIMIT 10) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY BlocksPlacedFaction DESC 
+    LIMIT 10
+- RkgBlocksPlaced.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgPlaytime
+
+- RkgPlaytime.Name = PLAYER AGE IN GAME DAYS
+
+- RkgPlaytime.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, CAST((ps.playtime*6)/(24*60*60)+1 AS INTEGER) AS Playtime 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND Playtime > 0 
+    ORDER BY Playtime DESC 
+    LIMIT 10
+- RkgPlaytime.PlayersTop10.CacheTime = 120
+
+- RkgPlaytime.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, CAST((Playtime*6)/(24*60*60)+1 AS INTEGER) 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.playtime) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, ps.playtime AS Playtime 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND Playtime > 0) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+          FROM (SELECT ROW_NUMBER() OVER (ORDER BY (ps.playtime) DESC) AS RowNr, e.entityid, e.name, ps.playtime AS Playtime 
+                FROM PlayerStatistics ps, Entities e 
+                WHERE ps.entityid = e.entityid AND Playtime > 0) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgPlaytime.LocalPlayer.CacheTime = 120
+
+- RkgPlaytime.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, CAST((ps.playtime*6)/(24*60*60)+1 AS INTEGER) AS Playtime 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND Playtime > 0 AND e.facgroup = 0 AND e.facid = @facid 
+    ORDER BY Playtime DESC 
+    LIMIT 10
+- RkgPlaytime.FactionTop10.CacheTime = 120
+
+- RkgPlaytime.AllFactionsTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, SUM(CAST((ps.playtime*6)/(24*60*60)+1 AS INTEGER)) AS Playtime 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND e.facgroup = 0 
+    GROUP BY e.facid 
+    ORDER BY Playtime DESC 
+    LIMIT 10
+- RkgPlaytime.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgTravelledKM
+
+- RkgTravelledKM.Name = KM ON GROUND
+
+- RkgTravelledKM.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, (ps.walkedmeters + ps.jetpackmeters + ps.playerbikemeters + ps.hvmeters)/1000 AS TravelledKM 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND TravelledKM > 0 
+    ORDER BY TravelledKM DESC 
+    LIMIT 10
+- RkgTravelledKM.PlayersTop10.CacheTime = 120
+
+- RkgTravelledKM.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, TravelledKM 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY ((ps.walkedmeters + ps.jetpackmeters + ps.playerbikemeters + ps.hvmeters)/1000) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, (ps.walkedmeters + ps.jetpackmeters + ps.playerbikemeters + ps.hvmeters)/1000 AS TravelledKM 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND TravelledKM > 0) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+          FROM (SELECT ROW_NUMBER() OVER (ORDER BY ((ps.walkedmeters + ps.jetpackmeters + ps.playerbikemeters + ps.hvmeters)/1000) DESC) AS RowNr, e.entityid, e.name, (ps.walkedmeters + ps.jetpackmeters + ps.playerbikemeters + ps.hvmeters)/1000 AS TravelledKM 
+                FROM PlayerStatistics ps, Entities e 
+                WHERE ps.entityid = e.entityid AND TravelledKM > 0) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgTravelledKM.LocalPlayer.CacheTime = 120
+
+- RkgTravelledKM.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, (ps.walkedmeters + ps.jetpackmeters + ps.playerbikemeters + ps.hvmeters)/1000 AS TravelledKM 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND TravelledKM > 0 AND e.facgroup = 0 AND e.facid = @facid 
+    ORDER BY TravelledKM DESC 
+    LIMIT 10
+- RkgTravelledKM.FactionTop10.CacheTime = 120
+
+- RkgTravelledKM.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.TravelledKM) AS TravelledKMFaction 
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, (ps.walkedmeters + ps.jetpackmeters + ps.playerbikemeters + ps.hvmeters)/1000 AS TravelledKM 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND TravelledKM > 0) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY TravelledKMFaction DESC 
+    LIMIT 10
+- RkgTravelledKM.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgTravelledKMAir
+
+- RkgTravelledKMAir.Name = KM IN SV/CV
+
+- RkgTravelledKMAir.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, (ps.svmeters + ps.cvmeters)/1000 AS TravelledKM 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND TravelledKM > 0 
+    ORDER BY TravelledKM DESC 
+    LIMIT 10
+- RkgTravelledKMAir.PlayersTop10.CacheTime = 120
+
+- RkgTravelledKMAir.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, TravelledKM 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY ((ps.svmeters + ps.cvmeters)/1000) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, (ps.svmeters + ps.cvmeters)/1000 AS TravelledKM 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid AND TravelledKM > 0) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+          FROM (SELECT ROW_NUMBER() OVER (ORDER BY ((ps.svmeters + ps.cvmeters)/1000) DESC) AS RowNr, e.entityid, e.name, (ps.svmeters + ps.cvmeters)/1000 AS TravelledKM 
+                FROM PlayerStatistics ps, Entities e 
+                WHERE ps.entityid = e.entityid AND TravelledKM > 0) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgTravelledKMAir.LocalPlayer.CacheTime = 120
+
+- RkgTravelledKMAir.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, (ps.svmeters + ps.cvmeters)/1000 AS TravelledKM 
+    FROM PlayerStatistics ps, Entities e 
+    WHERE ps.entityid = e.entityid AND TravelledKM > 0 AND e.facgroup = 0 AND e.facid = @facid 
+    ORDER BY TravelledKM DESC 
+    LIMIT 10
+- RkgTravelledKMAir.FactionTop10.CacheTime = 120
+
+- RkgTravelledKMAir.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.TravelledKM) AS TravelledKMFaction 
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, (ps.svmeters + ps.cvmeters)/1000 AS TravelledKM 
+          FROM PlayerStatistics ps, Entities e 
+          WHERE ps.entityid = e.entityid) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY TravelledKMFaction DESC 
+    LIMIT 10
+- RkgTravelledKMAir.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgTravelledLY
+
+- RkgTravelledLY.Name = WARPED LY
+
+- RkgTravelledLY.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz)))/10000)*0.1 AS INTEGER) AS DistanceLY 
+    FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+    WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid<> p2.ssid AND cp.type = 2
+    GROUP BY cp.entityid 
+    ORDER BY DistanceLY DESC 
+    LIMIT 10
+- RkgTravelledLY.PlayersTop10.CacheTime = 120
+
+- RkgTravelledLY.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, DistanceLY 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz)))/10000)*0.1 AS INTEGER) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz)))/10000)*0.1 AS INTEGER) AS DistanceLY 
+          FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+          WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid<> p2.ssid AND cp.type = 2
+          GROUP BY cp.entityid) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+          FROM (SELECT ROW_NUMBER() OVER (ORDER BY CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz)))/10000)*0.1 AS INTEGER) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz)))/10000)*0.1 AS INTEGER) AS DistanceLY 
+                FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+                WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid<> p2.ssid AND cp.type = 2 
+                GROUP BY cp.entityid) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgTravelledLY.LocalPlayer.CacheTime = 120
+
+- RkgTravelledLY.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz)))/10000)*0.1 AS INTEGER) AS DistanceLY 
+    FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+    WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid<> p2.ssid AND cp.type = 2 AND e.facgroup = 0 AND e.facid = @facid 
+    GROUP BY cp.entityid 
+    ORDER BY DistanceLY DESC 
+    LIMIT 10
+- RkgTravelledLY.FactionTop10.CacheTime = 120
+
+- RkgTravelledLY.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.DistanceLY) AS DistanceLYFaction 
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz)))/10000)*0.1 AS INTEGER) AS DistanceLY 
+          FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+          WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid<> p2.ssid AND cp.type = 2 
+          GROUP BY cp.entityid) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY DistanceLYFaction DESC 
+    LIMIT 10
+- RkgTravelledLY.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgTravelledAU
+
+- RkgTravelledAU.Name = WARPED AU
+
+- RkgTravelledAU.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz))))*0.1 AS INTEGER) AS DistanceAU 
+    FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+    WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid = p2.ssid 
+    GROUP BY cp.entityid 
+    ORDER BY DistanceAU DESC 
+    LIMIT 10
+- RkgTravelledAU.PlayersTop10.CacheTime = 120
+
+- RkgTravelledAU.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, DistanceAU 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz))))*0.1 AS INTEGER) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz))))*0.1 AS INTEGER) AS DistanceAU 
+          FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+          WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid = p2.ssid 
+          GROUP BY cp.entityid) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+          FROM (SELECT ROW_NUMBER() OVER (ORDER BY CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz))))*0.1 AS INTEGER) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz))))*0.1 AS INTEGER) AS DistanceAU 
+                FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+                WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid = p2.ssid 
+                GROUP BY cp.entityid) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgTravelledAU.LocalPlayer.CacheTime = 120
+
+- RkgTravelledAU.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz))))*0.1 AS INTEGER) AS DistanceAU 
+    FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+    WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid = p2.ssid AND e.facgroup = 0 AND e.facid = @facid 
+    GROUP BY cp.entityid 
+    ORDER BY DistanceAU DESC 
+    LIMIT 10
+- RkgTravelledAU.FactionTop10.CacheTime = 120
+
+- RkgTravelledAU.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.DistanceAU) AS DistanceAUFaction 
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM((sqrt((p1.sectorx-p2.sectorx)*(p1.sectorx-p2.sectorx) + (p1.sectory-p2.sectory)*(p1.sectory-p2.sectory) + (p1.sectorz-p2.sectorz)*(p1.sectorz-p2.sectorz))))*0.1 AS INTEGER) AS DistanceAU 
+          FROM ChangedPlayfields cp, Playfields p1, Playfields p2, Entities e 
+          WHERE cp.frompfid = p1.pfid AND cp.topfid = p2.pfid AND e.entityid = cp.entityid AND p1.ssid = p2.ssid 
+          GROUP BY cp.entityid) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY DistanceAUFaction DESC 
+    LIMIT 10 
+- RkgTravelledAU.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgVisitedPlanets
+
+- RkgVisitedPlanets.Name = VISITED PLANETS
+
+- RkgVisitedPlanets.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisPlanets 
+    FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+    WHERE dp.pfid = p.pfid AND p.pftype = 1 AND dp.entityid = e.entityid AND dp.facgroup = 1 
+    GROUP BY dp.entityid 
+    ORDER BY VisPlanets DESC 
+    LIMIT 10
+- RkgVisitedPlanets.PlayersTop10.CacheTime = 120
+
+- RkgVisitedPlanets.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, MainTable.VisPlanets 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (COUNT(*)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisPlanets 
+          FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+          WHERE dp.pfid = p.pfid AND p.pftype = 1 AND dp.entityid = e.entityid AND dp.facgroup = 1 
+          GROUP BY dp.entityid) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    		(SELECT RowNr 
+            FROM (SELECT ROW_NUMBER() OVER (ORDER BY (COUNT(*)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisPlanets 
+                   FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+                   WHERE dp.pfid = p.pfid AND p.pftype = 1 AND dp.entityid = e.entityid AND dp.facgroup = 1 
+                   GROUP BY dp.entityid) 
+            WHERE entityid = @entityid) 
+    LIMIT 5 
+- RkgVisitedPlanets.LocalPlayer.CacheTime = 120
+
+- RkgVisitedPlanets.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisPlanets 
+    FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+    WHERE dp.pfid = p.pfid AND p.pftype = 1 AND dp.entityid = e.entityid AND dp.facgroup = 1 AND e.facgroup = 0 AND e.facid = @facid 
+    GROUP BY dp.entityid 
+    ORDER BY VisPlanets DESC 
+    LIMIT 10
+- RkgVisitedPlanets.FactionTop10.CacheTime = 120
+
+- RkgVisitedPlanets.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.VisPlanets) AS VisPlanetsFaction 
+    FROM(SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisPlanets 
+         FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+         WHERE dp.pfid = p.pfid AND p.pftype = 1 AND dp.entityid = e.entityid AND dp.facgroup = 1 
+         GROUP BY dp.entityid) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY VisPlanetsFaction DESC 
+    LIMIT 10
+- RkgVisitedPlanets.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgVisitedMoons
+
+- RkgVisitedMoons.Name = VISITED MOONS
+
+- RkgVisitedMoons.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisMoons 
+    FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+    WHERE dp.pfid = p.pfid AND p.pftype = 4 AND dp.entityid = e.entityid AND dp.facgroup = 1 
+    GROUP BY dp.entityid 
+    ORDER BY VisMoons DESC 
+    LIMIT 10
+- RkgVisitedMoons.PlayersTop10.CacheTime = 120
+
+- RkgVisitedMoons.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, MainTable.VisMoons 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (COUNT(*)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisMoons 
+          FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+          WHERE dp.pfid = p.pfid AND p.pftype = 4 AND dp.entityid = e.entityid AND dp.facgroup = 1 
+          GROUP BY dp.entityid) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    		(SELECT RowNr 
+            FROM (SELECT ROW_NUMBER() OVER (ORDER BY (COUNT(*)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisMoons 
+                   FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+                   WHERE dp.pfid = p.pfid AND p.pftype = 4 AND dp.entityid = e.entityid AND dp.facgroup = 1 
+                   GROUP BY dp.entityid) 
+            WHERE entityid = @entityid) 
+    LIMIT 5 
+- RkgVisitedMoons.LocalPlayer.CacheTime = 120
+
+- RkgVisitedMoons.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisMoons 
+    FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+    WHERE dp.pfid = p.pfid AND p.pftype = 4 AND dp.entityid = e.entityid AND dp.facgroup = 1 AND e.facgroup = 0 AND e.facid = @facid 
+    GROUP BY dp.entityid 
+    ORDER BY VisMoons DESC 
+    LIMIT 10
+- RkgVisitedMoons.FactionTop10.CacheTime = 120
+
+- RkgVisitedMoons.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.VisMoons) AS VisMoonsFaction 
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, COUNT(*) AS VisMoons 
+          FROM DiscoveredPlayfields dp, Playfields p, Entities e 
+          WHERE dp.pfid = p.pfid AND p.pftype = 4 AND dp.entityid = e.entityid AND dp.facgroup = 1 
+          GROUP BY dp.entityid) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY VisMoonsFaction DESC 
+    LIMIT 10
+- RkgVisitedMoons.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgDiggedOres
+
+# Ores in the game
+#Id:  53, Name: SathiumResource
+#Id:  79, Name: CopperResource
+#Id:  80, Name: PromethiumResource
+#Id:  81, Name: IronResource
+#Id:  82, Name: SiliconResource
+#Id:  83, Name: NeodymiumResource
+#Id:  84, Name: MagnesiumResource
+#Id:  85, Name: CobaltResource
+#Id:  90, Name: ErestrumResource
+#Id:  91, Name: ZascosiumResource
+#Id:  95, Name: GoldResource
+#Id: 114, Name: PentaxidResource
+#Id: 132, Name: TitanResource
+
+- RkgDiggedOres.Name = DIGGED ORES
+
+- RkgDiggedOres.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, SUM(ps.count) AS DiggedOres 
+    FROM PlayerStatisticsOres ps, Entities e 
+    WHERE ps.entityid = e.entityid AND ps.id IN (53, 79, 80, 81, 82, 83, 84, 85, 90, 91, 95, 114, 132) 
+    GROUP BY ps.entityid 
+    ORDER BY DiggedOres DESC 
+    LIMIT 10
+- RkgDiggedOres.PlayersTop10.CacheTime = 120
+
+- RkgDiggedOres.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, DiggedOres 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (SUM(ps.count)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, SUM(ps.count) AS DiggedOres 
+          FROM PlayerStatisticsOres ps, Entities e 
+          WHERE ps.entityid = e.entityid AND ps.id IN (53, 79, 80, 81, 82, 83, 84, 85, 90, 91, 95, 114, 132)  
+          GROUP BY ps.entityid) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+          FROM (SELECT ROW_NUMBER() OVER (ORDER BY (SUM(ps.count)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, SUM(ps.count) AS DiggedOres 
+                FROM PlayerStatisticsOres ps, Entities e 
+                WHERE ps.entityid = e.entityid AND ps.id IN (53, 79, 80, 81, 82, 83, 84, 85, 90, 91, 95, 114, 132) 
+                GROUP BY ps.entityid) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgDiggedOres.LocalPlayer.CacheTime = 120
+
+- RkgDiggedOres.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, SUM(ps.count) AS DiggedOres 
+    FROM PlayerStatisticsOres ps, Entities e 
+    WHERE ps.entityid = e.entityid AND ps.id IN (53, 79, 80, 81, 82, 83, 84, 85, 90, 91, 95, 114, 132) AND e.facid = @facid 
+    GROUP BY ps.entityid 
+    ORDER BY DiggedOres DESC 
+    LIMIT 10
+- RkgDiggedOres.FactionTop10.CacheTime = 120
+
+- RkgDiggedOres.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.DiggedOres) AS DiggedOresFaction 
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, SUM(ps.count) AS DiggedOres 
+          FROM PlayerStatisticsOres ps, Entities e 
+          WHERE ps.entityid = e.entityid AND ps.id IN (53, 79, 80, 81, 82, 83, 84, 85, 90, 91, 95, 114, 132) 
+          GROUP BY ps.entityid) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY DiggedOresFaction DESC 
+    LIMIT 10
+- RkgDiggedOres.AllFactionsTop10.CacheTime = 120
+
+# -------------------- RkgTradeVolume
+
+- RkgTradeVolume.Name = TRADE VOLUME
+
+- RkgTradeVolume.PlayersTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM(th.totalprice) AS INTEGER) AS TradeVolume 
+    FROM TraderHistory th, Entities e 
+    WHERE th.entityid = e.entityid 
+    GROUP BY th.entityid 
+    ORDER BY TradeVolume DESC 
+    LIMIT 10
+- RkgTradeVolume.PlayersTop10.CacheTime = 120
+
+- RkgTradeVolume.LocalPlayer.Query =
+    SELECT MainTable.RowNr, MainTable.entityid, MainTable.facgroup, MainTable.facid, name, TradeVolume 
+    FROM (SELECT ROW_NUMBER() OVER (ORDER BY (SUM(th.totalprice)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, CAST(SUM(th.totalprice) AS INTEGER) AS TradeVolume 
+          FROM TraderHistory th, Entities e 
+          WHERE th.entityid = e.entityid  
+          GROUP BY th.entityid) AS MainTable 
+    WHERE MainTable.RowNr+2 >= 
+    	    (SELECT RowNr 
+            FROM (SELECT ROW_NUMBER() OVER (ORDER BY (SUM(th.totalprice)) DESC) AS RowNr, e.entityid, e.facgroup, e.facid, e.name, CAST(SUM(th.totalprice) AS INTEGER) AS TradeVolume 
+                  FROM TraderHistory th, Entities e 
+                  WHERE th.entityid = e.entityid 
+                  GROUP BY th.entityid) 
+    	     WHERE entityid = @entityid) 
+    LIMIT 5
+- RkgTradeVolume.LocalPlayer.CacheTime = 120
+
+- RkgTradeVolume.FactionTop10.Query =
+    SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM(th.totalprice) AS INTEGER) AS TradeVolume 
+    FROM TraderHistory th, Entities e 
+    WHERE th.entityid = e.entityid AND e.facid = @facid 
+    GROUP BY th.entityid 
+    ORDER BY TradeVolume DESC 
+    LIMIT 10
+- RkgTradeVolume.FactionTop10.CacheTime = 120
+
+- RkgTradeVolume.AllFactionsTop10.Query =
+    SELECT MainTable.entityid, MainTable.facgroup, MainTable.facid, MainTable.name, SUM(MainTable.TradeVolume) AS TradeVolumeFaction 
+    FROM (SELECT e.entityid, e.facgroup, e.facid, e.name, CAST(SUM(th.totalprice) AS INTEGER) AS TradeVolume 
+          FROM TraderHistory th, Entities e 
+          WHERE th.entityid = e.entityid 
+          GROUP BY th.entityid) AS MainTable 
+    WHERE MainTable.facgroup = 0 
+    GROUP BY MainTable.facid 
+    ORDER BY TradeVolumeFaction DESC 
+    LIMIT 10
+- RkgTradeVolume.AllFactionsTop10.CacheTime = 120

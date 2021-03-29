@@ -1,0 +1,1153 @@
+# Trader configuration file
+# For each Item please specify the data as follows. Instead of a range you may specify a single value only.
+# The buying section is optional, if not given the trader will not buy that item
+# Item name, sell price range, available stock range[, buy price range, max stock range]
+#
+# If the trader also buys an item (and thus, max stock is given) the original prices determined within the given ranges are used
+# if the trader's current stock is exactly half of max stock. If the trader has more items in stock, the prices goes down and vice versa.
+# If the trader only sells an item the price will not depend on the stock.
+# NOTE: - The buy price range is allowed to overlap with the sell price range, the trader will still check that he sells for a higher
+#         price than he buys (guaranteed spread is 5%).
+#       - You can specify a factor to the market price 
+#          Item1: "AutoMinerCore, mf=2.5-3.2, 10-50, mf=1.2-2.3, 55-150"
+
+# Please do not change the name of the default trader
+{ Trader Name: TraderDefault
+  SellingText: "Hi, I am trader <NAME>\nI am selling <GOODS>.\nYou can pay with <PAYMENT>."
+  # SellingText: "trwDefaultSellingText"
+  SellingGoods: "trwFood"
+  Item1: "CannedVegetables, 100-150, 3-5, 85-150, 55-150"
+  Item2: "CannedMeat, 222-333, 3-5, 178-222,55-150"
+}
+
+# You can change and configure the following traders 
+
+{ Trader Name: QuantumSTAR
+  SellingText: "Welcome to QuantumSTAR! How can we serve you today?\n<DISCOUNTTEXT>"
+  SellingGoods: "trwSpecial"
+  
+  Item1: "AutoMinerCore, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item2: "SmallOptronicBridge, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item3: "SmallOptronicMatrix, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item4: "LargeOptronicBridge, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item5: "LargeOptronicMatrix, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150" 
+}
+
+{ Trader Name: Talon
+  SellingText: "Welcome traveler! How may we serve you? \n<DISCOUNTTEXT>"
+  SellingGoods: "trwSeeds"
+  Discount: 0.08
+  Item1: "Bandages, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"  
+  Item2: "NCPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "MagnesiumPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "WaterBottle, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"    
+  Item5: "FruitJuice, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "VegetableJuice, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500" 
+  Item7: "Milk, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item8: "AkuaWine, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item9: "HotBeverage, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"  
+  Item10: "Beer, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"  
+  Item11: "Bread, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item12: "Cheese, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item13: "Stew, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-5000"
+  Item14: "FruitPie, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item15: "PumpkinCookie, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item16: "Waffles, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item17: "Ratatouille, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item18: "Cereals, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"  
+  Item19: "DurianRoot, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item20: "CornStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item21: "PumpkinStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-5000"
+  Item22: "TomatoStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item23: "WheatStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item24: "PearthingStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item25: "AlienPlantTube2Stage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item26: "DesertPlant20Stage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item27: "ElderberryStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item28: "AlienPalmTreeStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item29: "AlienplantWormStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item30: "BulbShroomYoungStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item31: "SnakeweedStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item32: "MushroomBellBrown01Stage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item33: "CobraLeavesPlantStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item34: "CoffeePlantStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item35: "InsanityPepperStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item36: "BigFlowerStage1, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"  
+  Item37: "GrowingPotConcrete, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item38: "GrowingPotWood, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item39: "LightPlant01, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item40: "PhoenixFernFonds, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item41: "TrumpetGreens, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: Totally Overpowered
+  SellingText: "Welcome to TOP! How can we serve you today?\n<DISCOUNTTEXT>"
+  SellingGoods: "trwFood"
+  Discount: 0.08
+  Item1: "PistolT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item2: "AdrenalineShot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "EnergyPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "50Caliber, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item5: "HotBeverage, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "WaterBottle, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "MultiBoost, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item8: "HumanNPCBlocks, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "AlienNPCBlocks, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "AkuaWine, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item11: "Beer, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item12: "EnergyDrink, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+}
+{ Trader Name: Artemis Commodities
+  SellingText: "Welcome to Artemis Commodities! Lowest prices on this planet!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwAmmo,trwWeaponsBasic,trwFood,trwMedical"
+  Discount: 0.08
+  Item1: "AutoMinerCore, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "FluxCoil, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+ 
+}
+
+{ Trader Name: Bertrams
+  SellingText: "Welcome to BERTRAM Weapons and Commodities!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwAmmo,trwWeaponsBasic,trwFood,trwMedical"
+  Discount: 0.08
+  Item1: "CannedVegetables, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item2: "CannedMeat, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item3: "EnergyDrink, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item4: "EmergencyRations, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item5: "Medikit02, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item6: "Bandages, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item7: "Pistol, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item8: "Shotgun, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item9: "AssaultRifle, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item10: "Sniper, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item11: "FlameThrower, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item12: "MultiTool, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item13: "OreScanner, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item14: "50Caliber, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item15: "ShotgunShells, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item16: "5.8mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item17: "12.7mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item18: "SlowRocket, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item19: "8.3mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item20: "FlameThrowerCanister, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item21: "MultiCharge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item22: "DrillCharge, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item23: "MagnesiumPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item24: "SmallOptronicBridge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+  Item25: "SmallOptronicMatrix, mf=1.1-1.2, 50-100, mf=0.8-0.9, 150-500"
+}
+
+{ Trader Name: OkYMedical
+  SellingText: "Welcome to Ok'Y Medical Care!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwMedical"
+  Discount: 0.08
+  Item1: "Bandages, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "Medikit04, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "Medikit01, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "Medikit02, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "Medikit03, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500" 
+  Item6: "AdrenalineShot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "EnergyPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "StomachPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "AntibioticOintment, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "AntiToxicOintment, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "AntiRadiationOintment, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "AntibioticPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "AntiToxicPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item14: "AntiParasitePills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "RadiationPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item16: "AntibioticInjection, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item17: "AntiToxicInjection, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item18: "AntiParasiteInjection, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item19: "AntiRadiationInjection, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: AuntMarys
+  SellingText: "Welcome to Aunt Mary's Gardening Center!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwSeeds"
+  Discount: 0.08
+  Item1: "DurianRoot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "CornStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "PumpkinStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "TomatoStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "WheatStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "PearthingStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "AlienPlantTube2Stage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "DesertPlant20Stage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "ElderberryStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "AlienPalmTreeStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "AlienplantWormStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "BulbShroomYoungStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "SnakeweedStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item14: "MushroomBellBrown01Stage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "CobraLeavesPlantStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item16: "CoffeePlantStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item17: "InsanityPepperStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item18: "BigFlowerStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"  
+  Item19: "GrowingPot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item20: "GrowingPotConcrete, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item21: "GrowingPotWood, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item22: "LightPlant01, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item23: "PhoenixFernFonds, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item24: "TrumpetGreens, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: InterWeap
+  SellingText: "Welcome to InterWeap Military Equipment Store!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwAmmo,trwWeaponsAdvanced,trwArmorBoost"
+  Discount: 0.08
+  Item1: "50Caliber, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "ShotgunShells, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "5.8mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "12.7mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "SlowRocket, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "8.3mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "PulseLaserChargePistol, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"  
+  Item8: "PulseLaserChargeRifle, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"  
+  Item9: "SciFiCannonPlasmaCharge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500" 
+  Item10: "SlowRocketHoming, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"    
+  Item11: "PistolT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item12: "Shotgun2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item13: "PulseRifle, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item14: "Sniper2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item15: "RocketLauncher, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item16: "RocketLauncherT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item17: "ScifiCannon, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item18: "Explosives, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item19: "LaserPistol, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item20: "LaserPistolT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"  
+  Item21: "LaserRifle, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"  
+  Item22: "Minigun, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"  
+  Item23: "ArmorHeavy, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item24: "MobilityBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item25: "ArmorBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"  
+  Item26: "MultiBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"  
+  Item27: "NightVision, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item28: "PistolKit, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100" 
+  Item29: "RifleKit, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item30: "ShotgunKit, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item31: "HeavyWeaponKit, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item32: "LaserKit, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item33: "SniperKit, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item34: "PulseRifleT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item35: "PlasticMaterial, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item36: "NCPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item37: "MagnesiumPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item38: "PlasmaCannonAlien, mf=1.1-1.2, 5-10, mf=0.8-0.9, 20-40"
+  Item39: "PlasmaCannonAlienCharge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item40: "FlameThrower, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"  
+  Item41: "FlameThrowerCanister, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"  
+}
+
+{ Trader Name: ServantCorp
+  SellingText: "Welcome to SERVANT CORP Hardware and Utilities Store!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwComponents,trwArmorBoost"
+  Discount: 0.08
+  Item1: "MultiToolT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item2: "TextureTool, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item3: "ColorTool, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item4: "Chainsaw, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item5: "MultiCharge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "BioFuel, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "ArmorMedium, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150 "
+  Item8: "NightVision, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150" 
+  Item9: "JetpackBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item10: "MobilityBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item11: "MultiBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item12: "InsulationBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item13: "OxygenBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item14: "RadiationBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item15: "EVABoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item16: "SteelPlate, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item17: "Electronics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item18: "OpticalFiber, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item19: "EnergyMatrix, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item20: "GlassPlate, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item21: "MechanicalComponents, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item22: "Motor, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item23: "Nanotubes, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item24: "Computer, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item25: "OreScanner, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item26: "PlasticMaterial, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item27: "NCPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item28: "MagnesiumPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500" 
+  Item29: "LargeOptronicBridge, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item30: "LargeOptronicMatrix, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150" 
+}
+
+{ Trader Name: MACorp
+  SellingText: "Welcome to M.A. Corp Mining and Materials!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwResources"
+  Discount: 0.08
+  Item1: "DrillT2, mf=1.1-1.2, 5-15, mf=0.8-0.9, 30-50"
+  Item2: "DrillCharge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "ArmorMedium, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150 "
+  Item4: "InsulationBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item5: "OxygenBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item6: "RadiationBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item7: "EVABoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item8: "IronIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "CobaltIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "CopperIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "SiliconIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "NeodymiumIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "TitanRods, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item14: "MagnesiumPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "GoldIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500 "
+  Item16: "PentaxidCrystal, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500 "
+  Item17: "PromethiumPellets, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item18: "AutoMinerCore, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item19: "OreScanner, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item20: "PlasticMaterial, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item21: "NCPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item22: "PlatinBar, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item23: "AluminiumPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: MarketCafe
+  SellingText: "Welcome to the Market Cafe Restaurant!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwFood"
+  Discount: 0.08
+  Item1: "Steak, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item2: "Ham, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item3: "Pizza, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item4: "Sandwich, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item5: "Bread, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item6: "VeggieBurger, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item7: "MeatBurger, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item8: "Cheese, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item9: "AkuaWine, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item10: "HotBeverage, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item11: "FriedVegetables, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item12: "Stew, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item13: "Milk, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item14: "WaterBottle, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item15: "FruitPie, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item16: "Waffles, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item17: "Ratatouille, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item18: "Cereals, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item19: "FruitJuice, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item20: "VegetableJuice, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"  
+  Item21: "EnergyDrink, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+
+}
+
+{ Trader Name: PaxPurgatory
+  SellingText: "Welcome to PaxPurgatory!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwFood"
+  Discount: 0.08
+  Item1: "PistolT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item2: "AdrenalineShot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "EnergyPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "50Caliber, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "HotBeverage, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "WaterBottle, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "MultiBoost, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item8: "HumanNPCBlocks, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item9: "AlienNPCBlocks, mf=1.1-1.2, 5-10, mf=0.8-0.9, 50-100"
+  Item10: "AkuaWine, mf=1.1-1.2, 5-15, mf=0.8-0.9, 30-50"
+  Item11: "EnergyDrink, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "PlatinOunce, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "Token:100, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item14: "Token:101, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item15: "Token:102, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item16: "Token:103, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item17: "Token:104, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item18: "Token:105, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item19: "Token:106, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item20: "Token:107, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item21: "Token:108, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item22: "Token:109, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item23: "Token:110, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item24: "Token:111, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item25: "Token:112, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15" 
+  Item26: "Token:113, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15" 
+}
+
+{ Trader Name: Food
+  SellingText: "Hi there. Want something to eat or to drink?<NAME>\nI am selling <GOODS>.\nYou can pay with <PAYMENT>\n<DISCOUNTTEXT>."
+  SellingGoods: "trwFood"
+  Discount: 0.08
+  Item1: "Steak, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item2: "Ham, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item3: "Pizza, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item4: "Sandwich, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item5: "Bread, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item6: "VeggieBurger, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item7: "MeatBurger, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item8: "Cheese, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item9: "AkuaWine, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item10: "HotBeverage, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item11: "FriedVegetables, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item12: "Stew, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item13: "Milk, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item14: "WaterBottle, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item15: "FruitPie, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item16: "Waffles, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item17: "Ratatouille, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item18: "Cereals, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item19: "FruitJuice, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+  Item20: "VegetableJuice, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"  
+  Item21: "EnergyDrink, mf=1.1-1.2, 100-500, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: Resources
+  SellingText: "We offer nearly all kinds of resources!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwResources"
+  Discount: 0.08
+  Item1: "IronIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "CobaltIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "CopperIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "SiliconIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "NeodymiumIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500 "
+  Item6: "MagnesiumPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "PromethiumPellets, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "PlasticMaterial, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "GoldIngot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500 "
+  Item10: "PentaxidCrystal, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "TitanRods, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "PlatinBar, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "AluminiumPowder, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: Medic
+  SellingText: "You need a treatment? We have what you need!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwMedical"
+  Discount: 0.08
+  Item1: "Bandages, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "Medikit04, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "Medikit01, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "Medikit02, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "Medikit03, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500" 
+  Item6: "AdrenalineShot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "EnergyPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "StomachPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "AntibioticOintment, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "AntiToxicOintment, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "AntiRadiationOintment, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "AntibioticPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "AntiToxicPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item14: "AntiParasitePills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "RadiationPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item16: "StomachPills, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item17: "AntibioticInjection, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item18: "AntiToxicInjection, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item19: "AntiParasiteInjection, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item20: "AntiRadiationInjection, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: MedicalIngredients
+  SellingText: "Get the ingrediences you need to craft your own medical drugs!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  Item1: "AlienParts01, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "AlienParts03, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "AlienTooth, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"  
+  Item4: "AlienSpikeLemon, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "NaturalStimulant, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "Spice, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "ConfettiMossScrapings, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "FireMossScrapings, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "PhoenixFernFonds, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "HerbalLeaves, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "PlantProtein, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "MushroomSpiky, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "Varonroot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500" 
+  Item14: "AlienThorn, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "AlienParts02, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: Seeds
+  SellingText: "Searching for a particular seed?\n<DISCOUNTTEXT>"
+  SellingGoods: "trwSeeds"
+  Discount: 0.08
+  Item1: "DurianRoot, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "CornStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "PumpkinStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "TomatoStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "WheatStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "PearthingStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "AlienPlantTube2Stage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "DesertPlant20Stage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "ElderberryStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "AlienPalmTreeStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "AlienplantWormStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "BulbShroomYoungStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "SnakeweedStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item14: "MushroomBellBrown01Stage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "CobraLeavesPlantStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item16: "CoffeePlantStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item17: "InsanityPepperStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item18: "BigFlowerStage1, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"  
+}
+
+{ Trader Name: ComponentsBasic
+  SellingText: "We are serving your basic crafting needs.\n<DISCOUNTTEXT>"
+  SellingGoods: "trwComponentsBasic"
+  Discount: 0.08
+  Item1: "SteelPlate, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "Electronics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "OpticalFiber, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "EnergyMatrix, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "GlassPlate, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "MechanicalComponents, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-5000"
+  Item7: "Motor, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "Nanotubes, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "Computer, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: BasicWeaponTools
+  SellingText: "We are serving your basic weaponry needs.\n<DISCOUNTTEXT>"
+  SellingGoods: "trwWeaponsBasic"
+  Discount: 0.08
+  Item1: "Pistol, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item2: "Shotgun, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item3: "AssaultRifle, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item4: "Sniper, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item5: "MultiTool, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item6: "DrillT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item7: "50Caliber, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "ShotgunShells, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "5.8mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "12.7mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "SlowRocket, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "8.3mmBullet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "BioFuel, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item14: "DrillCharge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "MultiCharge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item16: "TextureTool, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item17: "ColorTool, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item18: "Chainsaw, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item19: "FlameThrower, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"  
+  Item20: "FlameThrowerCanister, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: AdvancedWeaponToolsKits
+  SellingText: "Want to upgrade your weapons? You're at the right place!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwWeaponsAdvanced"
+  Discount: 0.08
+  Item1: "PistolT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item2: "Shotgun2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item3: "PulseRifle, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item4: "Sniper2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item5: "RocketLauncher, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item6: "RocketLauncherT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item7: "MultiToolT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item8: "DrillT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item9: "Minigun, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item10: "LaserPistol, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item11: "LaserPistolT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"  
+  Item12: "LaserRifle, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item13: "ScifiCannon, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item14: "PulseLaserChargePistol, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "PulseLaserChargeRifle, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item16: "SciFiCannonPlasmaCharge, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500" 
+  Item17: "SlowRocketHoming, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500" 
+  Item18: "RifleKit, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item19: "ShotgunKit, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item20: "HeavyWeaponKit, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item21: "LaserKit, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item22: "SniperKit, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item23: "PulseRifleT2, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+}
+
+{ Trader Name: ArmorAndBoosts
+  SellingText: "Want to upgrade your suit? We offer a selection of boosters!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  Item1: "InsulationBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item2: "MobilityBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item3: "ArmorBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item4: "JetpackBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item5: "MultiBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item6: "OxygenBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item7: "RadiationBoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item8: "EVABoost, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+  Item9: "ArmorMedium, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150 "
+  Item10: "ArmorHeavy, mf=1.1-1.2, 10-50, mf=0.8-0.9, 55-150"
+}
+
+###== COMMODITY TRADES ==== ###
+
+{ Trader Name: CommoditiesDefault
+  SellingText: "All the stuff you or others might need for their business!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08 
+  Item1: "AlienOrganism, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "AlphaVirus, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "AncientRelics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "Chemicals, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "Coolant, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "Fertilizer, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "Filters, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "Leather, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "Liquors, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "LuxuryGoods, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "MutatedSubstance, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "Narcotics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item14: "Optronics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item15: "RawDiamond, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item16: "Robotics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item17: "ScienceEquipment, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item18: "SpareParts, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item19: "Tablet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item20: "TechnicalArtifact, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item21: "ToxicLiquid, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item22: "ToxicWaste, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+} 
+{ Trader Name: CommoditiesDefaultWhiteGoods
+  SellingText: "We are offering materials for all legal businesses!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08 
+  
+  Item1: "Chemicals, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "Coolant, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "Fertilizer, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "Filters, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "Leather, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "Liquors, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "LuxuryGoods, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "Optronics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item9: "RawDiamond, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item10: "Robotics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item11: "ScienceEquipment, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item12: "SpareParts, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item13: "Tablet, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+}
+
+{ Trader Name: CommoditiesDefaultGreyGoods
+  SellingText: "Hey there! Want some special goods?\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08 
+  Item1: "AlienOrganism, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item2: "AlphaVirus, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item3: "AncientRelics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item4: "MutatedSubstance, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item5: "Narcotics, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item6: "TechnicalArtifact, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item7: "ToxicLiquid, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+  Item8: "ToxicWaste, mf=1.1-1.2, 50-100, mf=0.8-0.9, 100-500"
+} 
+
+{ Trader Name: MiningT1
+  SellingText: "Our mining company is selling basic ores for a good price!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player
+  Item1: "IronOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "SiliconOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "CopperOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "CobaltOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item5: "TitanOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item7: "PromethiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item8: "RawDiamond, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item9: "AncientRelics, mf=0.8-0.9, 1000-1500, 0, 0" 
+  #BUYING from player
+  Item10: "SpareParts, 0, 0 , mf=1.1-1.2, 1000-1500"
+  Item11: "AutoMinerCore, 0, 0 , mf=1.1-1.2, 1000-1500"   
+  Item12: "RadiationBoost, 0, 0 , mf=1.1-1.2, 1000-1500"  
+  Item13: "OreScanner, 0, 0 , mf=1.1-1.2, 1000-1500"
+  Item14: "AlienNPCBlocks, 0, 0 , mf=1.1-1.2, 1000-1500"
+  Item15: "HumanNPCBlocks, 0, 0 , mf=1.1-1.2, 1000-1500"
+} 
+{ Trader Name: MiningT2
+  SellingText: "We are selling advanced ores for a good price!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player
+  Item1: "PromethiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "MagnesiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "SathiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "AluminiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item5: "NeodymiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item7: "PentaxidOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item8: "TechnicalArtifact, mf=0.8-0.9, 1000-1500, 0, 0" 
+  #BUYING from player
+  Item9: "Robotics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "SpareParts, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "AutoMinerCore, 0, 0 , mf=1.1-1.2, 500-1000"   
+  Item12: "RadiationBoost, 0, 0 , mf=1.1-1.2, 500-1000"  
+  Item13: "OreScanner, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item14: "AlienNPCBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "HumanNPCBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: MiningSpace
+  SellingText: "We are selling a range of ores for a good price!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player
+  Item1: "PromethiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "CopperOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "NeodymiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "ErestrumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item5: "ZascosiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item6: "TitanOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item7: "SathiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item8: "PentaxidOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item9: "ToxicWaste, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item10: "XenoSubstrate, mf=0.8-0.9, 1000-1500, 0, 0" 
+  Item11: "HydrogenBottle, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item12: "OxygenBottleLarge, mf=0.8-0.9, 1000-1500, 0, 0"
+  #BUYING from player
+  Item13: "Filters, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item14: "Robotics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "SpareParts, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item16: "AutoMinerCore, 0, 0 , mf=1.1-1.2, 500-1000"   
+  Item17: "EVABoost, 0, 0 , mf=1.1-1.2, 500-1000"  
+  Item18: "OreScanner, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item19: "ArmorLight, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item20: "ArmorMedium, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item21: "ForcefieldEmitterBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item22: "AlienNPCBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item23: "HumanNPCBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+} 
+
+{ Trader Name: MiningLava
+  SellingText: "Need soome rare materials? We have you covered. Our prices are adequate!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player
+  Item1: "GoldOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "PlatinOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "RawDiamond, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "ToxicLiquid, mf=0.8-0.9, 1000-1500, 0, 0"
+  #BUYING from player 
+  Item5: "Coolant, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item6: "ArmorHeavy, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "InsulationBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "ForcefieldEmitterBlocks, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item9: "WaterBottle, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "AlienNPCBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "HumanNPCBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: Factory
+  SellingText: "We sell everything to run your production business!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player
+  Item1: "Chemicals, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "Coolant, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "SpareParts, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "Filters, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item5: "Tablet, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item6: "Robotics, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item7: "Optronics, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item8: "ScienceEquipment, mf=0.8-0.9, 1000-1500, 0, 0" 
+  Item9: "SmallOptronicBridge, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item10: "SmallOptronicMatrix, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item11: "LargeOptronicBridge, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item12: "LargeOptronicMatrix, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item13: "AutoMinerCore, mf=0.8-0.9, 1000-1500, 0, 0" 
+  #BUYING from player
+  Item14: "ErestrumGel, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "AluminiumCoil, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item16: "PlatinBar, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item17: "CobaltAlloy, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item18: "ZascosiumAlloy, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item19: "AlienNPCBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item20: "HumanNPCBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: Science
+  SellingText: "Check out our latest products! We are also searching for rare artifacts!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player
+  Item1: "RadiationBoost, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "InsulationBoost, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "ArmorBoost, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "JetpackBoost, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item5: "MultiBoost, mf=0.8-0.9, 1000-1500, 0, 0" 
+  Item6: "OxygenBoost, mf=0.8-0.9, 1000-1500, 0, 0" 
+  Item7: "MobilityBoost, mf=0.8-0.9, 1000-1500, 0, 0" 
+  Item8: "EVABoost, mf=0.8-0.9, 1000-1500, 0, 0"  
+  Item9: "TransportationBoost, mf=0.8-0.9, 1000-1500, 0, 0" 
+  Item10: "Medikit01, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item11: "Medikit02, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item12: "Medikit03, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item13: "Medikit04, mf=0.8-0.9, 1000-1500, 0, 0" 
+  #BUYING from player from player
+  Item14: "TechnicalArtifact, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "AncientRelics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item16: "MutatedSubstance, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item17: "AlphaVirus, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item18: "AlienOrganism, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item19: "AlienParts01, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item20: "AlienParts02, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item21: "AlienParts03, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item22: "AlienParts04, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item23: "ScienceEquipment, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item24: "Optronics, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item25: "Narcotics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item26: "Chemicals, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item27: "Tablet, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+{ Trader Name: MilitaryResearch
+  SellingText: "What we do is mostly confidential. But we are sure you can handle it!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player   
+  Item1: "AlphaVirus, mf=0.8-0.9, 50-100, 0, 0"
+  #BUYING from player  
+  Item2: "TechnicalArtifact, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item3: "AncientRelics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item4: "MutatedSubstance, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item5: "AlienOrganism, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item6: "AlienParts01, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "AlienParts02, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "AlienParts03, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item9: "AlienParts04, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item10: "ScienceEquipment, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "Optronics, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item12: "Narcotics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item13: "Chemicals, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item14: "Tablet, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: Spaceport
+  SellingText: "We are always in demand of supplies. Those strangers strolling around here might look for jobs, though.\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player
+  Item1: "AlienNPCBlocks, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "HumanNPCBlocks, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "Leather, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "ScienceEquipment, mf=0.8-0.9, 1000-1500, 0, 0"
+  #BUYING from player 
+  Item5: "SpareParts, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item6: "Coolant, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "Filters, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "Tablet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item9: "Robotics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "Optronics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "RawDiamond, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item12: "Liquors, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item13: "LuxuryGoods, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item14: "Narcotics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "TechnicalArtifact, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item16: "AncientRelics, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: Warehouse
+  SellingText: "Welcome to the big market. If we do not have it, you might want to sell it to us!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player  
+  Item1: "RawDiamond, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "LuxuryGoods, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "Fertilizer, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "Liquors, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item5: "Narcotics, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item6: "Robotics, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item7: "Optronics, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item8: "Leather, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item9: "ToxicWaste, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item10: "Coolant, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item11: "Chemicals, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item12: "Filters, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item13: "SpareParts, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item14: "ScienceEquipment, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item15: "Tablet, mf=0.8-0.9, 1000-1500, 0, 0"
+  #BUYING from player  
+  Item16: "AutoMinerCore, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item17: "SmallOptronicBridge, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item18: "SmallOptronicMatrix, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item19: "LargeOptronicBridge, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item20: "LargeOptronicMatrix, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item21: "RadiationBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item22: "InsulationBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item23: "ArmorBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item24: "JetpackBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item25: "MultiBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item26: "OxygenBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item27: "MobilityBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item28: "EVABoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item29: "TransportationBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item30: "Medikit01, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item31: "Medikit02, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item32: "Medikit03, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item33: "Medikit04, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item34: "ArmorHeavy, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item35: "ArmorMedium, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: Settlement
+  SellingText: "Welcome to our settlement. We are always looking for supplies!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player 
+  Item1: "AlienNPCBlocks, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "HumanNPCBlocks, mf=0.8-0.9, 1000-1500, 0, 0"
+  #BUYING from player 
+  Item3: "LuxuryGoods, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item4: "Narcotics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item5: "Liquors, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item6: "WaterBottle, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "EmergencyRations, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "Leather, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item9: "ConsoleBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "IndoorPlants, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "DecoBlocks, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item12: "DecoBlocks2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item13: "PlatinOunce, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item14: "Fertilizer, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "PhoenixFernFonds, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item16: "TrumpetGreens, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: Powerplant
+  SellingText: "Do you know ways to get rid of some .. byproducts? We offer good prices!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player 
+  Item1: "ToxicLiquid, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "ToxicWaste, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "MutatedSubstance, mf=0.8-0.9, 1000-1500, 0, 0"  
+  #BUYING from player 
+  Item4: "Coolant, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item5: "SpareParts, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item6: "GeneratorMST2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "RadiationBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "Robotics, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: Archeological
+  SellingText: "How about exchanging some dry bones for some good supplies? We pay well!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player   
+  Item1: "TechnicalArtifact, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "AncientRelics, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "AlienOrganism, mf=0.8-0.9, 1000-1500, 0, 0" 
+  #BUYING from player 
+  Item4: "Chemicals, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item5: "Filters, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item6: "ScienceEquipment, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "Tablet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "Liquors, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item9: "EmergencyRations, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "TransportationBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "JetpackBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: Recycling
+  SellingText: "The trash of the others is our business!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  #SELLING to player 
+  Item1: "Fertilizer, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "SpareParts, mf=0.8-0.9, 1000-1500, 0, 0"   
+  Item3: "Leather, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "GoldIngot, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item5: "PlatinBar, mf=0.8-0.9, 1000-1500, 0, 0"
+  #BUYING from player 
+  Item6: "ToxicLiquid, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "ToxicWaste, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "Chemicals, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item9: "Optronics, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "Filters, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "Robotics, 0, 0 , mf=1.1-1.2, 500-1000"    
+} 
+
+{ Trader Name: MilitaryT1
+  SellingText: "This is a restricted area - but why not support your local forces with some supplies?\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  Item1: "EmergencyRations, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item2: "Medikit01, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item3: "Medikit02, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item4: "Medikit03, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item5: "Medikit04, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item6: "RadiationPills, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "Bandages, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "ArmorLight, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item9: "ArmorBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "JetpackBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "MobilityBoost, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item12: "Pistol, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item13: "Shotgun, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item14: "AssaultRifle, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "Sniper, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item16: "PulseRifle, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item17: "RocketLauncher, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item18: "Minigun, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item19: "50Caliber, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item20: "ShotgunShells, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item21: "5.8mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item22: "12.7mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item23: "SlowRocket, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item24: "8.3mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: MilitaryT2
+  SellingText: "This is a restricted area - but why not support your local forces with some supplies?\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  Item1: "EmergencyRations, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item2: "Medikit01, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item3: "Medikit02, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item4: "Medikit03, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item5: "Medikit04, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item6: "RadiationPills, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "Bandages, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item9: "ArmorMedium, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "ArmorBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "JetpackBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item12: "MobilityBoost, 0, 0 , mf=1.1-1.2, 500-1000"  
+  Item13: "PistolT2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item14: "Shotgun2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "AssaultRifle, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item16: "Sniper2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item17: "PulseRifleT2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item18: "LaserPistol, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item19: "RocketLauncher, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item20: "Minigun, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item21: "50Caliber, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item22: "ShotgunShells, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item23: "5.8mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item24: "12.7mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item25: "SlowRocket, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item26: "8.3mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item27: "PulseLaserChargePistol, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+
+{ Trader Name: MilitaryT3
+  SellingText: "This is a restricted area - but why not support your local forces with some supplies?\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08
+  Item1: "EmergencyRations, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item2: "Medikit01, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item3: "Medikit02, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item4: "Medikit03, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item5: "Medikit04, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item6: "RadiationPills, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item7: "Bandages, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item8: "ArmorHeavy, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item9: "ArmorBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item10: "JetpackBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item11: "MobilityBoost, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item12: "PistolT2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item13: "Shotgun2, 0, 0 , mf=1.1-1.2, 500-1000" 
+  Item14: "Sniper2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item15: "PulseRifleT2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item16: "Minigun, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item17: "LaserPistolT2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item18: "LaserRifle, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item19: "RocketLauncherT2, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item20: "ScifiCannon, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item21: "50Caliber, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item22: "ShotgunShells, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item23: "5.8mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item24: "12.7mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item25: "8.3mmBullet, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item26: "PulseLaserChargePistol, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item27: "PulseLaserChargeRifle, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item28: "SciFiCannonPlasmaCharge, 0, 0 , mf=1.1-1.2, 500-1000"
+  Item29: "SlowRocketHoming, 0, 0 , mf=1.1-1.2, 500-1000"
+}
+{ Trader Name: CommunicationSurveillance
+  SellingText: "You stumbled into some surveillance reports? We might buy them.\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.08 
+  #SELLING to player (What the trader is selling to the player)
+  #BUYING from player (What the trader is buying)
+  Item1: "Coolant, 0, 0, mf=0.8-0.9, 100-500"
+  Item2: "Optronics, 0, 0, mf=0.8-0.9, 100-500"
+  Item3: "ScienceEquipment, 0, 0, mf=0.8-0.9, 100-500"
+  Item4: "SpareParts, 0, 0, mf=0.8-0.9, 100-500"
+  Item5: "Tablet, 0, 0, mf=0.8-0.9, 100-500"
+} 
+{ Trader Name: LuxuryTrader
+  SellingText: "We don't offer the usual trash. Look around and enjoy!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.4 
+  #SELLING to player (What the trader is selling to the player)
+  Item1: "LuxuryGoods, mf=0.8-0.9, 50-100, 0, 0"
+  Item2: "Tablet, mf=0.8-0.9, 50-100, 0, 0"
+  Item3: "AncientRelics, mf=0.8-0.9, 50-100, 0, 0"
+  Item4: "TechnicalArtifact, mf=0.8-0.9, 50-100, 0, 0"   
+  Item5: "MutatedSubstance, mf=0.8-0.9, 50-100, 0, 0"
+  #BUYING from player (What the trader is buying)
+  Item6: "Liquors, 0, 0, mf=1.1-1.2, 100-500"
+  Item7: "Narcotics, 0, 0, mf=1.1-1.2, 100-500"  
+  Item8: "Leather, 0, 0, mf=1.1-1.2, 100-500"
+  Item9: "RawDiamond, 0, 0, mf=1.1-1.2, 100-500"
+} 
+
+{ Trader Name: Dealer
+  SellingText: "Hey you over there! Want the good stuff?\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.3
+  #SELLING to player 
+  Item1: "Liquors, mf=0.8-0.9, 50-100, 0, 0"
+  Item2: "Narcotics, mf=0.8-0.9, 50-100, 0, 0"
+  Item3: "AlienOrganism, mf=0.8-0.9, 50-100, 0, 0"  
+  Item4: "LuxuryGoods, mf=0.8-0.9, 50-100, 0, 0"
+  Item5: "Tablet, mf=0.8-0.9, 50-100, 0, 0"
+  Item6: "AncientRelics, mf=0.8-0.9, 50-100, 0, 0"  
+  Item7: "TechnicalArtifact, mf=0.8-0.9, 50-100, 0, 0"
+  Item8: "MutatedSubstance, mf=0.8-0.9, 50-100, 0, 0"
+  #BUYING from player  
+  Item9: "Leather, 0, 0, mf=1.1-1.2, 1000-1500"
+  Item10: "GoldIngot, 0, 0, mf=1.1-1.2, 1000-1500"
+  Item11: "PlatinBar, 0, 0, mf=1.1-1.2, 1000-1500"  
+  Item12: "Optronics, 0, 0, mf=1.1-1.2, 1000-1500"  
+  Item13: "ToxicWaste, 0, 0, mf=1.1-1.2, 1000-1500"  
+} 
+
+{ Trader Name: Forger
+  SellingText: "Refining is our business!\n<DISCOUNTTEXT>"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.3
+  #SELLING to player 
+  Item1: "PromethiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item2: "MagnesiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item3: "SathiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item4: "AluminiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item5: "NeodymiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item6: "PentaxidOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item7: "RawDiamond, mf=0.8-0.9, 50-100, 0, 0"
+  Item8: "GoldOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item9: "PlatinOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item10: "ErestrumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item11: "ZascosiumOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item12: "TitanOre, mf=0.8-0.9, 1000-1500, 0, 0"
+  Item13: "XenoSubstrate, mf=0.8-0.9, 1000-1500, 0, 0" 
+  #BUYING from player
+  Item14: "Chemicals, 0, 0, mf=1.1-1.2, 1000-1500"
+  Item15: "Fertilizer, 0, 0, mf=1.1-1.2, 1000-1500"  
+  Item16: "Coolant, 0, 0, mf=1.1-1.2, 1000-1500"
+  Item17: "SpareParts, 0, 0, mf=1.1-1.2, 1000-1500" 
+  Item18: "Robotics, 0, 0, mf=1.1-1.2, 1000-15000"
+  Item19: "ScienceEquipment, 0, 0, mf=1.1-1.2, 1000-1500"
+  Item20: "ToxicLiquid, 0, 0, mf=1.1-1.2, 1000-1500"  
+  Item21: "AlphaVirus, 0, 0, mf=1.1-1.2, 1000-1500"  
+} 
+
+# ====================
+# Special Traders
+# =====================
+
+
+{ Trader Name: CredibilitySealTrader
+  SellingText: "Trade in your credibility seals for cash and credits!"
+  SellingGoods: "trwArmorBoost"
+  Discount: 0.3
+  #SELLING to player 
+  Item1: "Token:100, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item2: "Token:101, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item3: "Token:102, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item4: "Token:103, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item5: "Token:104, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item6: "Token:105, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item7: "Token:106, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item8: "Token:107, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item9: "Token:108, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item10: "Token:109, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item11: "Token:110, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item12: "Token:111, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15"
+  Item13: "Token:112, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15" 
+  Item14: "Token:113, mf=1.1-1.2, 2-5, mf=0.8-0.9, 10-15" 
+} 

@@ -1,0 +1,1 @@
+SELECT entityid,bpname,fuel FROM Structures WHERE playercreated='1' AND coretype='1' AND ispowered='1' AND discovery='0';
