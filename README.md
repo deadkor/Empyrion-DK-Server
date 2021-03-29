@@ -49,7 +49,7 @@ memo ==> My personnal memo :+1:
         - Turret Alien
 
 ##### Turret Zirax Plasma on my personal ship :
-![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/main/images/zirax_turret.jpg?raw=true)
+![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/master/images/zirax_turret.jpg?raw=true)
 
 <br>
 
@@ -61,7 +61,7 @@ memo ==> My personnal memo :+1:
     **:warning: I use unused ID InGame but developers can use them in futur for new items / blocks, so check after an update if ID's are still available**
 
 ##### The new block WaterBlockIG in my ship :
-![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/main/images/water_block_ig.jpg?raw=true)
+![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/master/images/water_block_ig.jpg?raw=true)
 <br>
 
 
@@ -76,7 +76,7 @@ memo ==> My personnal memo :+1:
     - Oxygen Bottle Small in all Constrcutors (except survivor's constructor)
 
 ##### Show Heavy Armor Epic craft from Advanced Constructor :
-![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/main/images/heavy_armor_epic.jpg?raw=true)
+![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/master/images/heavy_armor_epic.jpg?raw=true)
 
 <br>
 
@@ -93,7 +93,7 @@ memo ==> My personnal memo :+1:
         - `CB:GoToShip:SHIP_ID` ==> Teleport players on his ship in case of bugs (available every 30min)
 
 ##### Result of Discord commands `!players` & `!fuel` :
-![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/main/images/discord_cmd.png?raw=true)
+![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/master/images/discord_cmd.png?raw=true)
 
 <br>
 
@@ -105,7 +105,19 @@ memo ==> My personnal memo :+1:
 
 
 ##### Emp Admin Helper tool GUI (EAH) :
-![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/main/images/eah_gui.png?raw=true)
+![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/master/images/eah_gui.png?raw=true)
 <br>
 
+<br>
+########################################################################################
+<br>
 
+## 3. How to install
+
+**:warning: Save files before to replace them
+
+- #### 3.1 Multiplayer server :
+Move all files in Configuration folder into \*STEAM_INSTALL_FOLDER\*\SteamApps\common\Empyrion - Dedicated Server\Content\Configuration\
+
+- #### 3.2 SinglePlayer :
+Move all files in Configuration folder into \*STEAM_INSTALL_FOLDER\*\SteamApps\common\Empyrion - Galactic Survival\Saves\Games\\*NAME_OF_YOUR_GAME\*\Configuration
