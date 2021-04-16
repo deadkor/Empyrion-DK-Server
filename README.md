@@ -91,7 +91,7 @@ memo ==> My personnal memo :+1:
         - `CB:help` ==> Show help message
         - `CB:public` ==> Show public Structures "Made By DeaDKoR" (me)
         - `CB:GoToShip:SHIP_ID` ==> Teleport players on his ship in case of bugs (available every 30min)
-
+    
 ##### Result of Discord commands `!players` & `!fuel` :
 ![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/master/images/discord_cmd.png?raw=true)
 
@@ -102,6 +102,24 @@ memo ==> My personnal memo :+1:
     - Empyrion Scripting ==> https://github.com/GitHub-TC/EmpyrionScripting#empyrion-scripting-1
     - Ship Buying ==> https://github.com/GitHub-TC/EmpyrionShipBuying
     - Passenger ==> https://github.com/GitHub-TC/EmpyrionPassenger
+
+- ##### AutoHotKey :
+    - To use AutoHotKey script (dk_egs_ahk.ahk in background_scripts folder) you need to install AutoHotKey software ==> https://www.autohotkey.com/
+    - To use my HotKeys you need to disable NumPadLock. Keys list :
+        - NumPad0 : Hold Z key to auto walk. Press Z key to stop
+        - NumPad1 : Spam LMB to continually Fire / Mine
+        - NumPad2 : Open and loot everything in the box
+        - NumPad3 : Open control panel and enable / disable Thrusters from button
+        - NumPad4 : Open control panel and enable / disable Weapons from button
+        - NumPad5 : Open control panel and click on Statistiques tab
+
+- ##### SIM Dashboard :
+I created an interface to interact with game from smartphone / tablet (on Android) with SIM Dashboard app
+You have to install SIM Dashboard on your PC too : https://www.stryder-it.de/simdashboard/
+Some button need AutoHotKey installed to work
+
+##### SIM Dashboard interface and QR Code to download my interface (name in case QR Code doesn't work : Empyrion-DK-CUI) :
+![alt text](https://github.com/deadkor/Empyrion-DK-Server/blob/master/images/simdashboard.jpg?raw=true)
 
 
 ##### Emp Admin Helper tool GUI (EAH) :
